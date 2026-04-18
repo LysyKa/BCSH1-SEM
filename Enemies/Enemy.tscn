@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cmtmnlmhv5lee"]
+
+[ext_resource type="Script" uid="uid://bygqvqv38flx2" path="res://Enemies/Enemy.cs" id="1_4isyn"]
+[ext_resource type="Texture2D" uid="uid://dbtvc7kgupol0" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile245.png" id="2_wdetw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_unw8j"]
+radius = 11.0
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1936267005]
+motion_mode = 1
+script = ExtResource("1_4isyn")
+
+[node name="TowerDefenseTile245" type="Sprite2D" parent="." unique_id=544426741]
+scale = Vector2(1, 1.008)
+texture = ExtResource("2_wdetw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=275046552]
+shape = SubResource("CircleShape2D_unw8j")

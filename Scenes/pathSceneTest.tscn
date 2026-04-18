@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://7sbdq78ml24j"]
+
+[ext_resource type="Script" uid="uid://cccp6xqdj5emk" path="res://Scenes/PathFollow2d.cs" id="1_g866o"]
+[ext_resource type="Script" uid="uid://s5yycar10p08" path="res://Scenes/PathSceneTest.cs" id="1_y3rrl"]
+
+[sub_resource type="Curve2D" id="Curve2D_6ev3c"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 62, 1, 0, 0, 0, 0, 150, 46, 0, 0, 0, 0, 240, 90, 0, 0, 0, 0, 360, 137, 0, 0, 0, 0, 516, 187, 0, 0, 0, 0, 675, 194, 0, 0, 0, 0, 847, 191, 0, 0, 0, 0, 991, 196, 0, 0, 0, 0, 1129, 192, 0, 0, 0, 0, 1283, 189, 0, 0, 0, 0, 1411, 222, 0, 0, 0, 0, 1423, 311, 0, 0, 0, 0, 1406, 398, 0, 0, 0, 0, 1339, 462, 0, 0, 0, 0, 1249, 508, 0, 0, 0, 0, 1075, 529, 0, 0, 0, 0, 842, 581, 0, 0, 0, 0, 622, 579, 0, 0, 0, 0, 515, 644, 0, 0, 0, 0, 335, 646, 0, 0, 0, 0, 258, 712, 0, 0, 0, 0, 265, 824, 0, 0, 0, 0, 377, 898, 0, 0, 0, 0, 635, 895, 0, 0, 0, 0, 965, 902, 0, 0, 0, 0, 1240, 907, 0, 0, 0, 0, 1516, 894, 0, 0, 0, 0, 1676, 809, 0, 0, 0, 0, 1786, 674, 0, 0, 0, 0, 1890, 577, 0, 0, 0, 0, 2009, 565)
+}
+point_count = 32
+
+[node name="Path2D" type="Path2D" unique_id=1310370462]
+curve = SubResource("Curve2D_6ev3c")
+script = ExtResource("1_y3rrl")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=1178071913]
+position = Vector2(0, 1)
+loop = false
+script = ExtResource("1_g866o")

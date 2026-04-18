@@ -1,0 +1,27 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "dotnet",
+			"task": "build c:\\Users\\karlo\\Desktop\\Csharp\\untitled-tower-defense",
+			"file": "c:\\Users\\karlo\\Desktop\\Csharp\\untitled-tower-defense",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "dotnet: build c:\\Users\\karlo\\Desktop\\Csharp\\untitled-tower-defense",
+		},
+		    {
+      "label": "Run Godot Project",
+      "type": "shell",
+      "command": "C:\\Users\\karlo\\Desktop\\Godot_v4.6.1-stable_mono_win64\\Godot_v4.6.1-stable_mono_win64\\Godot_v4.6.1-stable_mono_win64.exe",
+      "args": [
+        "--path",
+        "${workspaceFolder}"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+	]
+}

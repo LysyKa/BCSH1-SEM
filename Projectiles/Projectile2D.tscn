@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://d30xpjbwnhw8b"]
+
+[ext_resource type="Texture2D" uid="uid://bwj46kt7kigqk" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile251.png" id="1_67ack"]
+[ext_resource type="Script" uid="uid://7l0ftw4fyyl" path="res://Projectiles/Projectile2d.cs" id="1_a4pyg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_67ack"]
+height = 32.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a4pyg"]
+radius = 13.0
+height = 40.0
+
+[node name="ProjectileMissile" type="CharacterBody2D" unique_id=33349892]
+script = ExtResource("1_a4pyg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1053906162]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_67ack")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1127073992]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=96202593]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_a4pyg")
+
+[node name="TowerDefenseTile251" type="Sprite2D" parent="." unique_id=615247041]
+rotation = 1.5707964
+texture = ExtResource("1_67ack")
