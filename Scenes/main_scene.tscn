@@ -7,7 +7,15 @@
 [ext_resource type="Script" uid="uid://ssf4mmwnkp2p" path="res://Scenes/Spawner.cs" id="4_6ev3c"]
 [ext_resource type="PackedScene" uid="uid://3m63hx3v6yv5" path="res://Towers/Tower2D.tscn" id="6_6ev3c"]
 [ext_resource type="Script" uid="uid://8rnrq0mwvhtg" path="res://Scenes/TowerContainer.cs" id="6_huasi"]
+[ext_resource type="Script" uid="uid://dnkm6jp61br67" path="res://Scenes/UiControl.cs" id="8_76v2p"]
 [ext_resource type="Script" uid="uid://48rnmp7pf8m6" path="res://Scenes/PlayerStats.cs" id="8_m1efj"]
+[ext_resource type="Texture2D" uid="uid://c2gaf57gjdws7" path="res://ZPics/cf5rab.svg" id="8_mai8y"]
+[ext_resource type="Texture2D" uid="uid://oq5tfmjitrqj" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile249.png" id="10_76v2p"]
+[ext_resource type="Texture2D" uid="uid://d7edo4jbi27u" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile250.png" id="11_drdnd"]
+[ext_resource type="Texture2D" uid="uid://khy3e63uv2hv" path="res://ZPics/kenney_tower-defense-top-down/PNG/new/coin 2.png" id="11_gnsmo"]
+[ext_resource type="Texture2D" uid="uid://bug4d3hne6ftl" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile291.png" id="12_lhp3t"]
+[ext_resource type="Texture2D" uid="uid://dv4to1tw2vgp3" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile292.png" id="13_gnsmo"]
+[ext_resource type="Texture2D" uid="uid://cp63t43b8sdgd" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile226.png" id="14_psl12"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6l7je"]
 texture = ExtResource("1_52fb6")
@@ -385,6 +393,9 @@ sources/0 = SubResource("TileSetAtlasSource_6l7je")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_huasi"]
 bg_color = Color(0.32001698, 0.5413141, 0.61950684, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mai8y"]
+bg_color = Color(0.32156864, 0.5411765, 0.61960787, 1)
+
 [node name="Main_Scene" type="Node2D" unique_id=49617148]
 script = ExtResource("1_6l7je")
 
@@ -397,7 +408,7 @@ tile_set = SubResource("TileSet_52fb6")
 rendering_quadrant_size = 64
 
 [node name="Camera2D" parent="IngameItems/MapLayer0" unique_id=1601662921 instance=ExtResource("3_x6ack")]
-position = Vector2(1105, 539)
+position = Vector2(1056, 493.41)
 zoom = Vector2(0.545, 0.545)
 limit_enabled = false
 limit_left = 0
@@ -436,14 +447,14 @@ autostart = true
 [node name="UIControl" type="Control" parent="UICanvasLayer" unique_id=1139373385]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("8_76v2p")
 
 [node name="PanelTowerStats" type="Panel" parent="UICanvasLayer/UIControl" unique_id=486837373]
-visible = false
 layout_mode = 0
-offset_left = 942.0
-offset_top = 111.0
-offset_right = 1154.0
-offset_bottom = 531.0
+offset_left = 940.0
+offset_top = 63.0
+offset_right = 1152.0
+offset_bottom = 255.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_huasi")
 
 [node name="MarginContainer" type="MarginContainer" parent="UICanvasLayer/UIControl/PanelTowerStats" unique_id=1373937265]
@@ -536,13 +547,223 @@ text = "Waves remaining:  "
 layout_mode = 2
 text = "Current gold: "
 
-[node name="Button" type="Button" parent="UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer" unique_id=977460869]
+[node name="ButtonSpawner" type="Button" parent="UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer" unique_id=977460869]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Button to pause or restart the spawner"
+
+[node name="ButtonBuild" type="Button" parent="UICanvasLayer/UIControl" unique_id=2038682484]
+layout_mode = 0
+offset_top = 50.0
+offset_right = 108.0
+offset_bottom = 158.0
+scale = Vector2(0.7, 0.7)
+icon = ExtResource("8_mai8y")
+
+[node name="PanelTowerBuild" type="Panel" parent="UICanvasLayer/UIControl" unique_id=195058535]
+visible = false
+layout_mode = 0
+offset_left = 99.0
+offset_top = 452.0
+offset_right = 1042.0
+offset_bottom = 646.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mai8y")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild" unique_id=1098531434]
+layout_mode = 0
+offset_right = 910.0
+offset_bottom = 191.0
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer" unique_id=1665716734]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer" unique_id=1304731414]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer/VBoxContainer4" unique_id=1643404814]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+icon = ExtResource("10_76v2p")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer/VBoxContainer4" unique_id=360856790]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Basic Tower"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer/VBoxContainer4" unique_id=1769360446]
+layout_mode = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer/VBoxContainer4/HBoxContainer" unique_id=1090093818]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "5"
+
+[node name="TextureRect" type="TextureRect" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer/VBoxContainer4/HBoxContainer" unique_id=994621252]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("11_gnsmo")
+
+[node name="MarginContainer2" type="MarginContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer" unique_id=1516836355]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer2" unique_id=485387305]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer2/VBoxContainer4" unique_id=749781728]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+icon = ExtResource("11_drdnd")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Label" type="Label" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer2/VBoxContainer4" unique_id=1403431446]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Double Tower"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer2/VBoxContainer4" unique_id=857722091]
+layout_mode = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer2/VBoxContainer4/HBoxContainer" unique_id=355175636]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "20"
+
+[node name="TextureRect" type="TextureRect" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer2/VBoxContainer4/HBoxContainer" unique_id=1748007891]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("11_gnsmo")
+
+[node name="MarginContainer3" type="MarginContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer" unique_id=1429467125]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer3" unique_id=738229939]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer3/VBoxContainer4" unique_id=501364118]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+icon = ExtResource("12_lhp3t")
+expand_icon = true
+
+[node name="Label" type="Label" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer3/VBoxContainer4" unique_id=15431473]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Fast Tower"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer3/VBoxContainer4" unique_id=1861330260]
+layout_mode = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer3/VBoxContainer4/HBoxContainer" unique_id=86808754]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "30"
+
+[node name="TextureRect" type="TextureRect" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer3/VBoxContainer4/HBoxContainer" unique_id=766686886]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("11_gnsmo")
+
+[node name="MarginContainer4" type="MarginContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer" unique_id=1761021124]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer4" unique_id=1892599994]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer4/VBoxContainer4" unique_id=1926797743]
+custom_minimum_size = Vector2(100.035, 100)
+layout_mode = 2
+icon = ExtResource("13_gnsmo")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer4/VBoxContainer4" unique_id=1464426236]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Rapid tower"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer4/VBoxContainer4" unique_id=214857284]
+layout_mode = 2
+alignment = 1
+
+[node name="Label3" type="Label" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer4/VBoxContainer4/HBoxContainer" unique_id=1252832051]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "50"
+
+[node name="TextureRect" type="TextureRect" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer4/VBoxContainer4/HBoxContainer" unique_id=1908568065]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("11_gnsmo")
+
+[node name="MarginContainer5" type="MarginContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer" unique_id=270447361]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer5" unique_id=2078450875]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer5/VBoxContainer4" unique_id=537271825]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+icon = ExtResource("14_psl12")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer5/VBoxContainer4" unique_id=1508169773]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Splash Tower"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer5/VBoxContainer4" unique_id=2089180766]
+layout_mode = 2
+alignment = 1
+
+[node name="Label3" type="Label" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer5/VBoxContainer4/HBoxContainer" unique_id=1218856013]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "50"
+
+[node name="TextureRect" type="TextureRect" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer5/VBoxContainer4/HBoxContainer" unique_id=1858494054]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("11_gnsmo")
 
 [node name="PlayerStats" type="Node2D" parent="." unique_id=532140308]
 script = ExtResource("8_m1efj")
 
 [connection signal="timeout" from="IngameItems/Spawner/Timer" to="IngameItems/Spawner" method="_on_timer_timeout"]
-[connection signal="pressed" from="UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/Button" to="IngameItems/Spawner" method="_on_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/ButtonSpawner" to="IngameItems/Spawner" method="_on_button_pressed"]
+[connection signal="pressed" from="UICanvasLayer/UIControl/ButtonBuild" to="UICanvasLayer/UIControl" method="_on_button_build_pressed"]
