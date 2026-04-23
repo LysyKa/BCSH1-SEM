@@ -17,22 +17,32 @@ public partial class Tower2d : StaticBody2D
 	public int targetCount = 1; // number of targets to attack simultaneously
 	[Export]
 	public int range = 500; // range in pixels
+	[Export]
+	public int cost = 5; // gold cost
+	public bool isFake = false;
 
 	public Godot.Collections.Array<Node2D> targets = new Godot.Collections.Array<Node2D>();
 	public Node2D currentTarget;
 
 	public PackedScene projectile = ResourceLoader.Load<PackedScene>("res://Projectiles/Projectile2D.tscn");
-
+	public String projectilePath = "";
+	public String spritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile249.png";
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		GetNode<Area2D>("TowerArea2D").GetNode<CollisionShape2D>("TowerRangeCollisionShape2D").Shape = new CircleShape2D() { Radius = range };
+		// GetNode<Sprite2D>("Sprite").Texture.ResourcePath = spritePath;
+		GetNode<Sprite2D>("Sprite").Texture = ResourceLoader.Load<Texture2D>(spritePath);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (isFake)
+		{
+			return;
+		}
 		targets = GetNode<Area2D>("TowerArea2D").GetOverlappingBodies();
 
 		var actualTargets = targets.Where(target => target is Enemy).ToArray();
@@ -59,7 +69,7 @@ public partial class Tower2d : StaticBody2D
 			}
 			if (frameCounter % (60 / attackSpeed) == 0)
 			{
-				var proj = projectile.Instantiate<Projectile2d>();
+				Projectile2d proj = projectile.Instantiate<Projectile2d>();
 				proj.GlobalPosition = GetNode<Marker2D>("Marker2D").GlobalPosition;
 				proj.CurrentTarget = currentTarget;
 				proj.Damage = bulletDamage;

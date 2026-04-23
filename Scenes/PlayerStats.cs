@@ -5,22 +5,32 @@ using System.Numerics;
 
 public partial class PlayerStats : Node2D
 {
-	private String playerName = "Default";
-	private int playerScore = 1;
-	private int victories = 0;
-	private int playerHealth = 10;
-	private int playerGold = 0;
+	public String playerName = "Default";
+	public int playerScore = 1;
+	public int victories = 0;
+	public int playerHealth = 10;
+	public int playerGold = 5;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+
 		tryLoadingSavedData();
 		trySavingData();
+		GetNode<Label>("../UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/LabelLivesLeft").Text = "Lives left: " + playerHealth;
+		updateGold();
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 	}
+
+	public void updateGold()
+	{
+		GetNode<Label>("../UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/LabelGold").Text = "Current gold: " + playerGold;
+	}
+
 
 	public void _enemyDiedEventHandler(int bounty)
 	{
