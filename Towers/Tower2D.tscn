@@ -18,7 +18,7 @@ script = ExtResource("1_wrv0c")
 [node name="TowerRangeCollisionShape2D" type="CollisionShape2D" parent="TowerArea2D" unique_id=260122331]
 shape = SubResource("CircleShape2D_kxyhy")
 
-[node name="TowerDefenseTile249" type="Sprite2D" parent="." unique_id=2934374]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=2934374]
 rotation = 1.5707964
 scale = Vector2(2, 2)
 texture = ExtResource("1_kxyhy")

@@ -3,7 +3,7 @@ using System;
 
 public partial class Projectile2d : CharacterBody2D
 {
-	public float Speed { get; set; } = 300.0f;
+	public float Speed { get; set; } = 500.0f;
 	public int Damage { get; set; } = 1;
 	public Node2D CurrentTarget { get; set; }
 
@@ -15,7 +15,7 @@ public partial class Projectile2d : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
+		// this.AddCollisionExceptionWith();
 	}
 	public override void _Process(double delta)
 	{

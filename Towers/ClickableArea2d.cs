@@ -3,6 +3,10 @@ using System;
 
 public partial class ClickableArea2d : Area2D
 {
+	public bool draw = false;
+	public float Radius = 0;
+	public Color CircleColor = new Color(0.2F, 0.2F, 1F, 0.2F);
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -17,10 +21,26 @@ public partial class ClickableArea2d : Area2D
 
 	public override void _InputEvent(Viewport viewport, InputEvent @event, int shapeIdx)
 	{
+		if (this.GetParent() is Tower2d tower && tower.isFake)
+		{
+			return;
+		}
 		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
 		{
 			if (mouseEvent.ButtonIndex == MouseButton.Left)
 			{
+				foreach (var towers in GetParent().GetParent().GetChildren())
+				{
+					GD.Print(towers.Name);
+					foreach	(var areas in towers.GetChildren())
+					{
+						if (areas is ClickableArea2d)
+						{
+							areas.GetChildren().Clear();
+						}
+					}
+				}
+				
 				GD.Print("Tower clicked!");
 				draw = true;
 				/*var areaTest = this.GetParent().GetNode<Area2D>("TowerArea2D");
@@ -65,8 +85,6 @@ public partial class ClickableArea2d : Area2D
 			GetChildren().Clear();
 		}
 	}
-	public bool draw = false;
-	public float Radius = 0;
-	public Color CircleColor = new Color(0.2F, 0.2F, 1F, 0.2F);
+
 
 }
