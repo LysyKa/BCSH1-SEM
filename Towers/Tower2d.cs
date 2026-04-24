@@ -19,8 +19,12 @@ public partial class Tower2d : StaticBody2D
 	public int range = 500; // range in pixels
 	[Export]
 	public int cost = 5; // gold cost
+	[Export]
+	public double rotationSpeed = 3D; // radians per second
+	[Export]
+	public double fireAngleThreshold = 0.1D; // how close to target angle before firing
+	
 	public bool isFake = false;
-
 	public Godot.Collections.Array<Node2D> targets = new Godot.Collections.Array<Node2D>();
 	public Node2D currentTarget;
 
@@ -61,13 +65,12 @@ public partial class Tower2d : StaticBody2D
 
 			}*/
 
-			RotateTowards(currentTarget.GlobalPosition);
-
+			double angleDifference = RotateTowards(currentTarget.GlobalPosition,delta);
 			if (attackSpeed <= 0)
 			{
 				return; // Prevent division by zero or negative attack speed
 			}
-			if (frameCounter % (60 / attackSpeed) == 0)
+			if (frameCounter % (60 / attackSpeed) == 0 && angleDifference < fireAngleThreshold)
 			{
 				Projectile2d proj = projectile.Instantiate<Projectile2d>();
 				proj.GlobalPosition = GetNode<Marker2D>("Marker2D").GlobalPosition;
@@ -90,11 +93,17 @@ public partial class Tower2d : StaticBody2D
 			//framesForOutput = 60;
 		}
 	}
-		private void RotateTowards(Vector2 targetPosition)
+		private double RotateTowards(Vector2 targetPosition, double delta)
 	{
+		// Vector2 direction = targetPosition - GlobalPosition;
+		// float angle = Mathf.Atan2(direction.Y, direction.X);
+		// Rotation = angle;
+
 		Vector2 direction = targetPosition - GlobalPosition;
-		float angle = Mathf.Atan2(direction.Y, direction.X);
-		Rotation = angle;
+		double targetAngle = Mathf.Atan2(direction.Y, direction.X);
+		Rotation = (float)Mathf.RotateToward(Rotation, targetAngle, rotationSpeed * delta);
+    	return Mathf.Abs(Mathf.AngleDifference(Rotation, targetAngle));
+
 	}
 
 }

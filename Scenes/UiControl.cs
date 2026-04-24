@@ -54,6 +54,7 @@ public partial class UiControl : Control
 				GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").RemoveChild(currTower);
 			}
 			currTower = null;
+			GetNode<Panel>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats").Visible = false;
 		}
 		else
 		{
@@ -78,104 +79,73 @@ public partial class UiControl : Control
 					GD.Print("Mohl by být error, investigate!");
 					break;
 			}
+			lastState = true;
+			simulateTower = true;
+			String pathTemp = "/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats/MarginContainer/VBoxContainer/";
+			GetNode<Panel>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats").Visible = true;
+			GetNode<Label>(pathTemp + "HBoxContainer3/LabelDamage").Text = currTower.bulletDamage.ToString();
+			GetNode<Label>(pathTemp + "HBoxContainer4/LabelAttackSpeed").Text = currTower.attackSpeed.ToString();
+			GetNode<Label>(pathTemp + "HBoxContainer5/LabelTargetCount").Text = currTower.targetCount.ToString();
+			GetNode<Label>(pathTemp + "HBoxContainer6/LabelRange").Text = currTower.range.ToString();
 		}
 	}
 
+	public Tower2d createTower(double attackSpeed, int bulletDamage, int targetCount, int range, int cost, double fireAngle, string spritePath)
+	{
+		Tower2d tower = (Tower2d)GD.Load<PackedScene>("res://Towers/Tower2D.tscn").Instantiate();
+		tower.attackSpeed = attackSpeed;
+		tower.bulletDamage = bulletDamage;
+		tower.targetCount = targetCount;
+		tower.range = range;
+		tower.cost = cost;
+		tower.fireAngleThreshold = fireAngle;
+		tower.spritePath = spritePath;
+
+		tower.isFake = true;
+		return tower;
+	}
 
 	public void _on_button_basic_tower_pressed(Button button)
 	{
+		String path = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile249.png";
+		currTower = createTower(attackSpeed: 1, bulletDamage: 5, targetCount: 1, range: 400, cost: 5, fireAngle: 0.2D, spritePath: path);
 
-			var tower = (Tower2d)GD.Load<PackedScene>("res://Towers/Tower2D.tscn").Instantiate();
-
-			tower.attackSpeed = 1;
-			tower.bulletDamage = 5;
-			tower.targetCount = 1;
-			tower.range = 400;
-			tower.cost = 5;
-
-			lastState = true;
-			simulateTower = true;
-			tower.isFake = true;
-			tower.spritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile249.png";
-			currTower = tower;
-
-
-			GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
+		GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
 	}
 
 	public void _on_button_double_tower_pressed(Button button)
 	{
-			var tower = (Tower2d)GD.Load<PackedScene>("res://Towers/Tower2D.tscn").Instantiate();
-			tower.attackSpeed = 1;
-			tower.bulletDamage = 5;
-			tower.targetCount = 2;
-			tower.range = 400;
-			tower.cost = 20;
+		String path = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile250.png";
+		currTower = createTower(attackSpeed: 1, bulletDamage: 5, targetCount: 2, range: 450, cost: 20, fireAngle: 0.5D, spritePath: path);
 
-			lastState = true;
-			simulateTower = true;
-			tower.isFake = true;
-			tower.spritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile250.png";
-			currTower = tower;
 
-			GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
+		GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
 	}
 
 	public void _on_button_fast_tower_pressed(Button button)
 	{
-			var tower = (Tower2d)GD.Load<PackedScene>("res://Towers/Tower2D.tscn").Instantiate();
-			tower.attackSpeed = 5;
-			tower.bulletDamage = 2;
-			tower.targetCount = 1;
-			tower.range = 400;
-			tower.cost = 30;
+		String path = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile291.png";
+		currTower = createTower(attackSpeed: 5, bulletDamage: 2, targetCount: 1, range: 250, cost: 30, fireAngle: 0.05D, spritePath: path);
 
-			lastState = true;
-			simulateTower = true;
-			tower.isFake = true;
-			tower.spritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile291.png";
-
-			currTower = tower;
-
-			GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
+		GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
 	}
 
 	public void _on_button_rapid_tower_pressed(Button button)
 	{
-			var tower = (Tower2d)GD.Load<PackedScene>("res://Towers/Tower2D.tscn").Instantiate();
-			tower.attackSpeed = 10;
-			tower.bulletDamage = 2;
-			tower.targetCount = 1;
-			tower.range = 400;
-			tower.cost = 50;
+		String path = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile292.png";
+		currTower = createTower(attackSpeed: 10, bulletDamage: 2, targetCount: 2, range: 200, cost: 50, fireAngle: 0.05D, spritePath: path);
 
-			lastState = true;
-			simulateTower = true;
-			tower.isFake = true;
-			tower.spritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile292.png";
 
-			currTower = tower;
-
-			GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
+		GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
 	}
 
 	public void _on_button_splash_tower_pressed(Button button)
 	{
-			var tower = (Tower2d)GD.Load<PackedScene>("res://Towers/Tower2D.tscn").Instantiate();
-			tower.attackSpeed = 1;
-			tower.bulletDamage = 1;
-			tower.targetCount = 1;
-			tower.range = 400;
-			tower.cost = 100;
+		String path = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile226.png";
+		currTower = createTower(attackSpeed: 1, bulletDamage: 1, targetCount: 1, range: 400, cost: 100, fireAngle: 0.1D, spritePath: path);
 
-			lastState = true;
-			simulateTower = true;
-			tower.isFake = true;
-			tower.spritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile226.png";
 
-			currTower = tower;
-
-			GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
+		GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
 	}
 
 	public override void _Input(InputEvent e)
@@ -185,7 +155,7 @@ public partial class UiControl : Control
 			if (mouseEvent.Pressed)
 			{
 
-				if (mouseEvent.ButtonIndex == MouseButton.Left && currTower != null)
+				if (mouseEvent.ButtonIndex == MouseButton.Left && currTower != null && !GetNode<Panel>("PanelTowerBuild").GetGlobalRect().HasPoint(GetGlobalMousePosition()))
 				{
 					if (currTower.cost <= GetNode<PlayerStats>("/root/Main_Scene/PlayerStats").playerGold)
 					{
@@ -211,6 +181,7 @@ public partial class UiControl : Control
 					buttonGroup.GetPressedButton().ButtonPressed = false;
 					lastState = false;
 					simulateTower = false;
+					GetNode<Panel>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats").Visible = false;
 				}
 			}
 		}
