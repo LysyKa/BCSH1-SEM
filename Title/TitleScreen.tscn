@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://6wxug1vk3l58"]
+
+[ext_resource type="Script" uid="uid://ba8esl7m42m1i" path="res://Title/TitleScreen.cs" id="1_2tuh7"]
+[ext_resource type="Texture2D" uid="uid://cwvdql7u5ad0x" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile199.png" id="2_8a8s5"]
+[ext_resource type="Texture2D" uid="uid://b0v7sgigcri7y" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile202.png" id="3_n47r1"]
+[ext_resource type="Texture2D" uid="uid://fi12nqkv1146" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile201.png" id="4_qrids"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r5agj"]
+bg_color = Color(0.39537415, 0.635122, 0.7622568, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tuh7"]
+bg_color = Color(0.7520948, 0.56177884, 0.26697403, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8a8s5"]
+bg_color = Color(0.13007328, 0.24195217, 0.43519747, 0.7607843)
+
+[node name="TitleScreen" type="Node2D" unique_id=777051287]
+script = ExtResource("1_2tuh7")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1005757727]
+offset_right = 798.0
+offset_bottom = 596.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_r5agj")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=91523971]
+offset_right = 798.0
+offset_bottom = 597.0
+
+[node name="Panel" type="Panel" parent="CenterContainer" unique_id=1170076635]
+custom_minimum_size = Vector2(380.12, 457.325)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2tuh7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel" unique_id=1487406778]
+layout_mode = 0
+offset_left = 6.0
+offset_right = 175.0
+offset_bottom = 267.0
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="LabelNameOfDaGame" type="Label" parent="CenterContainer/Panel/VBoxContainer" unique_id=428967814]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Pojmenovaná(surely)
+ tower defense"
+
+[node name="ButtonNewGame" type="Button" parent="CenterContainer/Panel/VBoxContainer" unique_id=1909917020]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "New game"
+
+[node name="ButtonLoadGame" type="Button" parent="CenterContainer/Panel/VBoxContainer" unique_id=586534394]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+disabled = true
+text = "Load game"
+
+[node name="ButtonUpgrades" type="Button" parent="CenterContainer/Panel/VBoxContainer" unique_id=1302083874]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Upgrades"
+
+[node name="ButtonSettings" type="Button" parent="CenterContainer/Panel/VBoxContainer" unique_id=1485493765]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Settings"
+
+[node name="ButtonExit" type="Button" parent="CenterContainer/Panel/VBoxContainer" unique_id=1143713242]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Exit"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=515067965]
+anchor_mode = 0
+limit_left = 0
+limit_top = 0
+limit_right = 800
+limit_bottom = 600
+
+[node name="PopupPanel" type="PopupPanel" parent="." unique_id=1591299633]
+oversampling_override = 1.0
+initial_position = 2
+size = Vector2i(620, 462)
+visible = true
+always_on_top = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_8a8s5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel" unique_id=84480826]
+offset_right = 620.0
+offset_bottom = 462.0
+theme_override_constants/separation = 66
+alignment = 1
+
+[node name="Label" type="Label" parent="PopupPanel/VBoxContainer" unique_id=2036444784]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Choose a map to start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupPanel/VBoxContainer" unique_id=2020673403]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel/VBoxContainer/HBoxContainer" unique_id=1994639688]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="PopupPanel/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=153375028]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture_normal = ExtResource("2_8a8s5")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="PopupPanel/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=877821006]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Green Delight"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PopupPanel/VBoxContainer/HBoxContainer" unique_id=889861891]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureButton2" type="TextureButton" parent="PopupPanel/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=490132388]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture_normal = ExtResource("3_n47r1")
+stretch_mode = 4
+
+[node name="Label2" type="Label" parent="PopupPanel/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=633277599]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Beach Rest"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PopupPanel/VBoxContainer/HBoxContainer" unique_id=1913086717]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureButton3" type="TextureButton" parent="PopupPanel/VBoxContainer/HBoxContainer/VBoxContainer3" unique_id=189476319]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture_normal = ExtResource("4_qrids")
+stretch_mode = 4
+
+[node name="Label3" type="Label" parent="PopupPanel/VBoxContainer/HBoxContainer/VBoxContainer3" unique_id=983437441]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Ocean Paradise"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PopupPanel/VBoxContainer" unique_id=1165038206]
+layout_mode = 2
+alignment = 1
+
+[connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/ButtonNewGame" to="." method="_on_button_new_game_pressed" flags=18]
+[connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/ButtonLoadGame" to="." method="_on_button_load_game_pressed" flags=18]
+[connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/ButtonUpgrades" to="." method="_on_button_upgrades_pressed" flags=18]
+[connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/ButtonSettings" to="." method="_on_button_settings_pressed" flags=18]
+[connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/ButtonExit" to="." method="_on_button_exit_pressed" flags=18]
+[connection signal="pressed" from="PopupPanel/VBoxContainer/HBoxContainer/VBoxContainer/TextureButton" to="." method="_on_popup_button_pressed" flags=18 binds= [1, Vector2i(1152, 648)]]

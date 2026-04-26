@@ -9,7 +9,7 @@ public partial class PlayerStats : Node2D
 	public int playerScore = 1;
 	public int victories = 0;
 	public int playerHealth = 10;
-	public int playerGold = 5;
+	public int playerGold = 500;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

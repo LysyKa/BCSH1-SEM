@@ -18,6 +18,7 @@ public partial class Spawner : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		GetNode<Label>("/root/Main_Scene/UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/LabelCurrWave").Text = "Current wave: " + (totalWaves - currWaveCount) + "/" + totalWaves;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
