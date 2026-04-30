@@ -400,7 +400,6 @@ bg_color = Color(0.32156864, 0.5411765, 0.61960787, 1)
 script = ExtResource("1_6l7je")
 
 [node name="IngameItems" type="Node2D" parent="." unique_id=257696364]
-visible = false
 
 [node name="MapLayer0" type="TileMapLayer" parent="IngameItems" unique_id=762762376]
 use_parent_material = true
@@ -410,7 +409,6 @@ rendering_quadrant_size = 64
 script = ExtResource("3_psl12")
 
 [node name="Camera2D" parent="IngameItems/MapLayer0" unique_id=1601662921 instance=ExtResource("3_x6ack")]
-visible = false
 position = Vector2(1056, 493.41)
 zoom = Vector2(0.545, 0.545)
 limit_enabled = false
@@ -433,7 +431,6 @@ script = ExtResource("4_6ev3c")
 wait_time = 0.5
 
 [node name="UICanvasLayer" type="CanvasLayer" parent="." unique_id=1436660106]
-visible = false
 script = ExtResource("8_gnsmo")
 
 [node name="UIControl" type="Control" parent="UICanvasLayer" unique_id=1139373385]
@@ -542,6 +539,33 @@ offset_bottom = 50.0
 grow_horizontal = 2
 theme_override_constants/separation = 50
 alignment = 1
+
+[node name="Button" type="Button" parent="UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer" unique_id=242445653]
+layout_mode = 2
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 30
+text = "⚙️"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer" unique_id=1954977221]
+layout_mode = 2
+
+[node name="ButtonPause" type="Button" parent="UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/HBoxContainer" unique_id=559273635]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+toggle_mode = true
+text = "||"
+
+[node name="ButtonRun" type="Button" parent="UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/HBoxContainer" unique_id=380458827]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+toggle_mode = true
+text = "▶"
+
+[node name="ButtonFast" type="Button" parent="UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/HBoxContainer" unique_id=2025194984]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+toggle_mode = true
+text = "▶▶"
 
 [node name="LabelLivesLeft" type="Label" parent="UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer" unique_id=972424951]
 layout_mode = 2

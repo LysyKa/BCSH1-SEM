@@ -34,7 +34,7 @@ public partial class Enemy : CharacterBody2D
 			EmitSignal(SignalName.HealthChanged);
 		}
 	}
-
+	public int progress;
 	[Signal]
 	public delegate void HealthChangedEventHandler(int newLife);
 	[Signal]

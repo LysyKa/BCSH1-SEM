@@ -3,7 +3,9 @@ using System;
 
 public partial class UiControl : Control
 {
-	ButtonGroup buttonGroup;
+	ButtonGroup buttonGroupTowers;
+	ButtonGroup buttonGroupSpeed;
+
 	bool simulateTower = false;
 	Tower2d currTower;
 	bool lastState = false;
@@ -11,19 +13,32 @@ public partial class UiControl : Control
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		buttonGroup = new ButtonGroup();
+
+		buttonGroupSpeed = new ButtonGroup();
+		foreach (Button button in GetNode("PanelPlayerStats/HBoxContainer/HBoxContainer/").GetChildren())
+		{
+			GD.Print(button.Name);
+			if (button is Button btn)
+			{
+				GD.Print(btn.Name);
+				btn.ButtonGroup = buttonGroupSpeed;
+			}
+		}
+		buttonGroupSpeed.Pressed += _on_button_speedup_pressed;
+
+		buttonGroupTowers = new ButtonGroup();
 		foreach (var container in GetNode("PanelTowerBuild/HBoxContainer/").GetChildren())
 		{
 			foreach (var button in container.GetNode("VBoxContainer4").GetChildren())
 			{
 				if (button is Button btn)
 				{
-					btn.ButtonGroup = buttonGroup;
+					btn.ButtonGroup = buttonGroupTowers;
 				}
 			}
 
 		}
-		buttonGroup.Pressed += _on_button_tower_pressed;
+		buttonGroupTowers.Pressed += _on_button_tower_pressed;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,7 +58,7 @@ public partial class UiControl : Control
 
 	public void _on_button_tower_pressed(BaseButton button)
 	{
-
+		GD.Print("kvok");
 		if (button.ButtonPressed && lastState)
 		{
 			button.ButtonPressed = false;
@@ -164,7 +179,7 @@ public partial class UiControl : Control
 						GetNode<PlayerStats>("/root/Main_Scene/PlayerStats").playerGold -= currTower.cost;
 						GetNode<PlayerStats>("/root/Main_Scene/PlayerStats").updateGold();
 						currTower = null;
-						buttonGroup.GetPressedButton().ButtonPressed = false;
+						buttonGroupTowers.GetPressedButton().ButtonPressed = false;
 						lastState = false;
 						simulateTower = false;
 					}
@@ -178,12 +193,37 @@ public partial class UiControl : Control
 				{
 					GetParent().GetParent().GetNode<Node2D>("./IngameItems/TowerContainer").RemoveChild(currTower);
 					currTower = null;
-					buttonGroup.GetPressedButton().ButtonPressed = false;
+					buttonGroupTowers.GetPressedButton().ButtonPressed = false;
 					lastState = false;
 					simulateTower = false;
 					GetNode<Panel>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats").Visible = false;
 				}
 			}
+		}
+	}
+
+
+
+	// utoky vezi nejsou zavisle na engine timescalu, POTREBA ZMENIT LOGIKU
+	public void _on_button_speedup_pressed(BaseButton button)
+	{
+
+		GD.Print("It works");
+		if (button.Name.Equals("ButtonPause"))
+		{
+			Engine.TimeScale = 0f;
+			GD.Print("Paused");
+		}
+		else if (button.Name.Equals("ButtonRun"))
+		{
+			Engine.TimeScale = 1f;
+			GD.Print("Running at normal speed");
+		}
+		else
+		{
+			Engine.TimeScale = 2f;
+			GD.Print("Running at double speed");
+
 		}
 	}
 }
