@@ -22,4 +22,9 @@ public partial class TowerContainer : Node2D
 		AddChild(towerIn);
 	}
 
+	public void _remove_tower(Tower2d tower)
+	{
+		RemoveChild(tower);
+	}
+
 }

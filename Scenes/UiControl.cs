@@ -13,7 +13,7 @@ public partial class UiControl : Control
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
+		MouseFilter = MouseFilterEnum.Pass;
 		buttonGroupSpeed = new ButtonGroup();
 		foreach (Button button in GetNode("PanelPlayerStats/HBoxContainer/HBoxContainer/").GetChildren())
 		{
@@ -163,14 +163,17 @@ public partial class UiControl : Control
 		GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
 	}
 
-	public override void _Input(InputEvent e)
+	public override void _GuiInput(InputEvent e)
 	{
 		if (e is InputEventMouseButton mouseEvent)
 		{
 			if (mouseEvent.Pressed)
 			{
 
-				if (mouseEvent.ButtonIndex == MouseButton.Left && currTower != null && !GetNode<Panel>("PanelTowerBuild").GetGlobalRect().HasPoint(GetGlobalMousePosition()))
+				if (mouseEvent.ButtonIndex == MouseButton.Left && currTower != null 
+				&& !GetNode<Panel>("PanelTowerBuild").GetGlobalRect().HasPoint(GetGlobalMousePosition())
+				&& !GetNode<Panel>("PanelPlayerStats").GetGlobalRect().HasPoint(GetGlobalMousePosition())
+				&& !GetNode<Panel>("PanelTowerStats").GetGlobalRect().HasPoint(GetGlobalMousePosition()))
 				{
 					if (currTower.cost <= GetNode<PlayerStats>("/root/Main_Scene/PlayerStats").playerGold)
 					{
@@ -197,14 +200,13 @@ public partial class UiControl : Control
 					lastState = false;
 					simulateTower = false;
 					GetNode<Panel>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats").Visible = false;
+				} else
+				{
+					GD.Print("Test");
 				}
 			}
 		}
 	}
-
-
-
-	// utoky vezi nejsou zavisle na engine timescalu, POTREBA ZMENIT LOGIKU
 	public void _on_button_speedup_pressed(BaseButton button)
 	{
 

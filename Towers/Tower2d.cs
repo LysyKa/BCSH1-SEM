@@ -39,7 +39,6 @@ public partial class Tower2d : StaticBody2D
 	public override void _Ready()
 	{
 		GetNode<Area2D>("TowerArea2D").GetNode<CollisionShape2D>("TowerRangeCollisionShape2D").Shape = new CircleShape2D() { Radius = range };
-		// GetNode<Sprite2D>("Sprite").Texture.ResourcePath = spritePath;
 		GetNode<Sprite2D>("Sprite").Texture = ResourceLoader.Load<Texture2D>(spritePath);
 		attackTimer = new Timer();
 		if (attackSpeed > 0)attackTimer.WaitTime = 1/attackSpeed; else attackTimer.WaitTime = 0;

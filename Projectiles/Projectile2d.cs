@@ -35,7 +35,7 @@ public partial class Projectile2d : CharacterBody2D
 					if (CurrentTarget is Enemy enemy)
 					{
 						int remainingLife = enemy.GetDamaged(Damage);
-						GD.Print("Projectile hit target: " + CurrentTarget.Name + " - Remaining Life " + remainingLife);
+						//GD.Print("Projectile hit target: " + CurrentTarget.Name + " - Remaining Life " + remainingLife);
 					}
 					this.GetParent().RemoveChild(this);
 					QueueFree(); // Destroy the projectile after hitting the target

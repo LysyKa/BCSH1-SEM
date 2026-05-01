@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://ssf4mmwnkp2p" path="res://Scenes/Spawner.cs" id="4_6ev3c"]
 [ext_resource type="Script" uid="uid://8rnrq0mwvhtg" path="res://Scenes/TowerContainer.cs" id="6_huasi"]
 [ext_resource type="Script" uid="uid://dnkm6jp61br67" path="res://Scenes/UiControl.cs" id="8_76v2p"]
-[ext_resource type="Script" uid="uid://bw7ndwx6hxjp2" path="res://Scenes/UiCanvasLayer.cs" id="8_gnsmo"]
 [ext_resource type="Script" uid="uid://48rnmp7pf8m6" path="res://Scenes/PlayerStats.cs" id="8_m1efj"]
 [ext_resource type="Texture2D" uid="uid://c2gaf57gjdws7" path="res://ZPics/cf5rab.svg" id="8_mai8y"]
 [ext_resource type="Texture2D" uid="uid://oq5tfmjitrqj" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile249.png" id="10_76v2p"]
@@ -431,7 +430,6 @@ script = ExtResource("4_6ev3c")
 wait_time = 0.5
 
 [node name="UICanvasLayer" type="CanvasLayer" parent="." unique_id=1436660106]
-script = ExtResource("8_gnsmo")
 
 [node name="UIControl" type="Control" parent="UICanvasLayer" unique_id=1139373385]
 layout_mode = 3
@@ -538,7 +536,6 @@ offset_right = 575.5
 offset_bottom = 50.0
 grow_horizontal = 2
 theme_override_constants/separation = 50
-alignment = 1
 
 [node name="Button" type="Button" parent="UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer" unique_id=242445653]
 layout_mode = 2
@@ -582,7 +579,7 @@ text = "Current gold: "
 [node name="ButtonSpawner" type="Button" parent="UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer" unique_id=977460869]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "pause or restart spawner"
+text = "pause or restart"
 
 [node name="ButtonBuild" type="Button" parent="UICanvasLayer/UIControl" unique_id=2038682484]
 layout_mode = 0
