@@ -10,7 +10,7 @@ radius = 11.0
 motion_mode = 1
 script = ExtResource("1_4isyn")
 
-[node name="TowerDefenseTile245" type="Sprite2D" parent="." unique_id=544426741]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=544426741]
 scale = Vector2(1, 1.008)
 texture = ExtResource("2_wdetw")
 

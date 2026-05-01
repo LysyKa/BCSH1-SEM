@@ -23,6 +23,8 @@ public partial class Tower2d : StaticBody2D
 	public double rotationSpeed = 3D; // radians per second
 	[Export]
 	public double fireAngleThreshold = 0.1D; // how close to target angle before firing
+	[Export]
+	public float projectileSpeed = 0.1F; // how close to target angle before firing
 	public Timer attackTimer;
 	private double currDelta;
 	private double currAngleDifference;
@@ -32,7 +34,7 @@ public partial class Tower2d : StaticBody2D
 	public Node2D currentTarget;
 
 	public PackedScene projectile = ResourceLoader.Load<PackedScene>("res://Projectiles/Projectile2D.tscn");
-	public String projectilePath = "";
+	public String projectilePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile251.png";
 	public String spritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile249.png";
 
 	// Called when the node enters the scene tree for the first time.
@@ -84,6 +86,8 @@ public partial class Tower2d : StaticBody2D
 				proj.GlobalPosition = GetNode<Marker2D>("Marker2D").GlobalPosition;
 				proj.CurrentTarget = currentTarget;
 				proj.Damage = bulletDamage;
+				proj.spritePath = projectilePath;
+				proj.Speed = projectileSpeed;
 				GetParent().AddChild(proj);
 			}
 			currTargets.Remove(currentTarget);

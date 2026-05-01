@@ -35,7 +35,7 @@ public partial class PlayerStats : Node2D
 	public void _enemyDiedEventHandler(int bounty)
 	{
 		// Handle enemy death, e.g., increase player score by bounty
-		GD.Print("Enemy died, bounty: " + bounty);
+		//GD.Print("Enemy died, bounty: " + bounty);
 		playerGold += bounty;
 		GetNode<Label>("../UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/LabelGold").Text = "Current gold: " + playerGold;
 		GetNode<Label>("../UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/LabelLivesLeft").Text = "Lives left: " + playerHealth;
@@ -44,7 +44,7 @@ public partial class PlayerStats : Node2D
 	public void _enemyPassedEventHandler(int damage)
 	{
 		// Handle enemy passing, e.g., decrease player health by damage
-		GD.Print("Enemy passed, damage: " + damage);
+		//GD.Print("Enemy passed, damage: " + damage);
 		playerHealth -= damage;
 		GetNode<Label>("../UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/LabelLivesLeft").Text = "Lives left: " + playerHealth;
 

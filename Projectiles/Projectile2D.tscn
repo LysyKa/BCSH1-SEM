@@ -23,6 +23,6 @@ shape = SubResource("CapsuleShape2D_67ack")
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_a4pyg")
 
-[node name="TowerDefenseTile251" type="Sprite2D" parent="." unique_id=615247041]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=615247041]
 rotation = 1.5707964
 texture = ExtResource("1_67ack")

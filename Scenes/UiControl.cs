@@ -58,7 +58,6 @@ public partial class UiControl : Control
 
 	public void _on_button_tower_pressed(BaseButton button)
 	{
-		GD.Print("kvok");
 		if (button.ButtonPressed && lastState)
 		{
 			button.ButtonPressed = false;
@@ -105,7 +104,16 @@ public partial class UiControl : Control
 		}
 	}
 
-	public Tower2d createTower(double attackSpeed, int bulletDamage, int targetCount, int range, int cost, double fireAngle, string spritePath)
+	public Tower2d createTower(
+	double attackSpeed,
+	 int bulletDamage,
+	  int targetCount,
+	   int range,
+		int cost,
+		 double fireAngle,
+		  string spritePath,
+		   string projectileSpritePath,
+		 	float projectileSpeed = 500F)
 	{
 		Tower2d tower = (Tower2d)GD.Load<PackedScene>("res://Towers/Tower2D.tscn").Instantiate();
 		tower.attackSpeed = attackSpeed;
@@ -115,15 +123,26 @@ public partial class UiControl : Control
 		tower.cost = cost;
 		tower.fireAngleThreshold = fireAngle;
 		tower.spritePath = spritePath;
-
+		tower.projectilePath = projectileSpritePath;
 		tower.isFake = true;
+		tower.projectileSpeed = projectileSpeed;
+
 		return tower;
 	}
 
 	public void _on_button_basic_tower_pressed(Button button)
 	{
 		String path = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile249.png";
-		currTower = createTower(attackSpeed: 1, bulletDamage: 5, targetCount: 1, range: 400, cost: 5, fireAngle: 0.2D, spritePath: path);
+		String projectileSpritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile251.png";
+		currTower = createTower(
+		attackSpeed: 1,
+		 bulletDamage: 5,
+		  targetCount: 1,
+		   range: 400,
+			cost: 5,
+			 fireAngle: 0.2D,
+			  spritePath: path,
+			   projectileSpritePath: projectileSpritePath);
 
 		GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
 	}
@@ -131,7 +150,9 @@ public partial class UiControl : Control
 	public void _on_button_double_tower_pressed(Button button)
 	{
 		String path = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile250.png";
-		currTower = createTower(attackSpeed: 1, bulletDamage: 5, targetCount: 2, range: 450, cost: 20, fireAngle: 0.5D, spritePath: path);
+		String projectileSpritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile252.png";
+
+		currTower = createTower(attackSpeed: 1, bulletDamage: 5, targetCount: 2, range: 450, cost: 20, fireAngle: 0.5D, spritePath: path, projectileSpritePath: projectileSpritePath);
 
 
 		GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
@@ -140,7 +161,9 @@ public partial class UiControl : Control
 	public void _on_button_fast_tower_pressed(Button button)
 	{
 		String path = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile291.png";
-		currTower = createTower(attackSpeed: 5, bulletDamage: 2, targetCount: 1, range: 250, cost: 30, fireAngle: 0.05D, spritePath: path);
+		String projectileSpritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile272.png";
+
+		currTower = createTower(attackSpeed: 5, bulletDamage: 2, targetCount: 1, range: 250, cost: 30, fireAngle: 0.05D, spritePath: path, projectileSpritePath: projectileSpritePath);
 
 		GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
 	}
@@ -148,7 +171,9 @@ public partial class UiControl : Control
 	public void _on_button_rapid_tower_pressed(Button button)
 	{
 		String path = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile292.png";
-		currTower = createTower(attackSpeed: 10, bulletDamage: 2, targetCount: 2, range: 200, cost: 50, fireAngle: 0.05D, spritePath: path);
+		String projectileSpritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile273.png";
+
+		currTower = createTower(attackSpeed: 10, bulletDamage: 2, targetCount: 2, range: 200, cost: 50, fireAngle: 0.05D, spritePath: path, projectileSpritePath: projectileSpritePath);
 
 
 		GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
@@ -157,7 +182,9 @@ public partial class UiControl : Control
 	public void _on_button_splash_tower_pressed(Button button)
 	{
 		String path = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile226.png";
-		currTower = createTower(attackSpeed: 1, bulletDamage: 1, targetCount: 1, range: 400, cost: 100, fireAngle: 0.1D, spritePath: path);
+		String projectileSpritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile296.png";
+
+		currTower = createTower(attackSpeed: 1, bulletDamage: 1, targetCount: 1, range: 400, cost: 100, fireAngle: 0.1D, spritePath: path, projectileSpritePath: projectileSpritePath, projectileSpeed: 200F);
 
 
 		GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
@@ -170,7 +197,7 @@ public partial class UiControl : Control
 			if (mouseEvent.Pressed)
 			{
 
-				if (mouseEvent.ButtonIndex == MouseButton.Left && currTower != null 
+				if (mouseEvent.ButtonIndex == MouseButton.Left && currTower != null
 				&& !GetNode<Panel>("PanelTowerBuild").GetGlobalRect().HasPoint(GetGlobalMousePosition())
 				&& !GetNode<Panel>("PanelPlayerStats").GetGlobalRect().HasPoint(GetGlobalMousePosition())
 				&& !GetNode<Panel>("PanelTowerStats").GetGlobalRect().HasPoint(GetGlobalMousePosition()))
@@ -200,9 +227,10 @@ public partial class UiControl : Control
 					lastState = false;
 					simulateTower = false;
 					GetNode<Panel>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats").Visible = false;
-				} else
+				}
+				else
 				{
-					GD.Print("Test");
+					//GD.Print("Test");
 				}
 			}
 		}

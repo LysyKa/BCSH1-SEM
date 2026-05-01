@@ -6,7 +6,7 @@ public partial class PathFollow2d : PathFollow2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		var enemy = ResourceLoader.Load<PackedScene>("res://Enemies/Enemy1.tscn");
+		var enemy = ResourceLoader.Load<PackedScene>("res://Enemies/Enemy.tscn");
 		var enemyIn = enemy.Instantiate<CharacterBody2D>();
 		AddChild(enemyIn);
 	}
