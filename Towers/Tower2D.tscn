@@ -32,3 +32,6 @@ script = ExtResource("3_asovx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea2D" unique_id=1120222131]
 position = Vector2(-13, 0)
 shape = SubResource("RectangleShape2D_wrv0c")
+
+[connection signal="mouse_entered" from="ClickableArea2D" to="ClickableArea2D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ClickableArea2D" to="ClickableArea2D" method="_on_mouse_exited"]

@@ -32,7 +32,7 @@ public partial class ClickableArea2d : Area2D
 				foreach (var towers in GetParent().GetParent().GetChildren())
 				{
 					GD.Print(towers.Name);
-					foreach	(var areas in towers.GetChildren())
+					foreach (var areas in towers.GetChildren())
 					{
 						if (areas is ClickableArea2d)
 						{
@@ -40,18 +40,10 @@ public partial class ClickableArea2d : Area2D
 						}
 					}
 				}
-				
+
 				GD.Print("Tower clicked!");
 				draw = true;
-				/*var areaTest = this.GetParent().GetNode<Area2D>("TowerArea2D");
-				var collisionShape = areaTest.GetNode<CollisionShape2D>("TowerRangeCollisionShape2D");
-				// var collisionShape = areaTest.GetNode<CollisionShape2d>("TowerArea2D/TowerRangeCollisionShape2D");
-				
-				CircleShape2D test = (CircleShape2D)collisionShape.Shape;
-				GD.Print("Collision shape radius: " + test.Radius);*/
-
 				Radius = (GetParent().GetNode<CollisionShape2D>("TowerArea2D/TowerRangeCollisionShape2D").Shape as CircleShape2D).Radius;
-				// Radius = GetParent().GetNode<Tower2d>("Tower2D").range;
 				GD.Print("Drawing circle with radius: " + Radius);
 
 				GetNode<Panel>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats").Visible = true;
@@ -84,6 +76,28 @@ public partial class ClickableArea2d : Area2D
 		{
 			GetChildren().Clear();
 		}
+	}
+
+	private void _on_mouse_entered()
+	{
+		GD.Print("Mouse entered");
+		draw = true;
+		Radius = (GetParent().GetNode<CollisionShape2D>("TowerArea2D/TowerRangeCollisionShape2D").Shape as CircleShape2D).Radius;
+
+		GetNode<Panel>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats").Visible = true;
+		GetNode<Label>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats/MarginContainer/VBoxContainer/HBoxContainer3/LabelDamage").Text = ((Tower2d)GetParent()).bulletDamage.ToString();
+		GetNode<Label>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats/MarginContainer/VBoxContainer/HBoxContainer4/LabelAttackSpeed").Text = ((Tower2d)GetParent()).attackSpeed.ToString();
+		GetNode<Label>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats/MarginContainer/VBoxContainer/HBoxContainer5/LabelTargetCount").Text = ((Tower2d)GetParent()).targetCount.ToString();
+		GetNode<Label>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats/MarginContainer/VBoxContainer/HBoxContainer6/LabelRange").Text = ((Tower2d)GetParent()).range.ToString();
+		QueueRedraw();
+	}
+
+	private void _on_mouse_exited()
+	{
+		GD.Print("Mouse exited");
+		GetNode<Panel>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats").Visible = false;
+		draw = false;
+		QueueRedraw();
 	}
 
 

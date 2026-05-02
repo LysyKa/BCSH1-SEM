@@ -19,8 +19,8 @@ public partial class MainScene : Node2D
 
 	public void LoadScreen(string scenePath)
 	{
-		var map = ResourceLoader.Load<PackedScene>(scenePath).Instantiate();
-		AddChild(map);
+		var firstScene = ResourceLoader.Load<PackedScene>(scenePath).Instantiate();
+		AddChild(firstScene);
 	}
 
 

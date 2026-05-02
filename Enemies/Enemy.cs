@@ -10,7 +10,7 @@ public partial class Enemy : CharacterBody2D
 	[Export]
 	public int Speed { get; set; } = 1;
 	[Export]
-	int Bounty { get; set; } = 1;
+	public int Bounty { get; set; } = 1;
 	private int life = 10;
 	[Export]
 	public int Life
@@ -27,7 +27,7 @@ public partial class Enemy : CharacterBody2D
 				// Emit a signal or call a method to handle enemy death
 				//GD.Print("Enemy died");
 				EmitSignal(SignalName.EnemyDied, Bounty);
-				GetParent().RemoveChild(this);
+				// GetParent().RemoveChild(this);
 				QueueFree();
 				return;
 			}
@@ -63,7 +63,7 @@ public partial class Enemy : CharacterBody2D
 		{
 			//GD.Print("Enemy reached the end of the path");
 			EmitSignal(SignalName.EnemyPassed, Damage);
-			GetParent().RemoveChild(this);
+			//GetParent().RemoveChild(this);
 			QueueFree();
 		}
 	}

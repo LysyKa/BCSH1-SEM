@@ -20,7 +20,7 @@ public partial class Tower2d : StaticBody2D
 	[Export]
 	public int cost = 5; // gold cost
 	[Export]
-	public double rotationSpeed = 3D; // radians per second
+	public double rotationSpeed = 6D; // radians per second
 	[Export]
 	public double fireAngleThreshold = 0.1D; // how close to target angle before firing
 	[Export]
@@ -62,7 +62,7 @@ public partial class Tower2d : StaticBody2D
 
 		if (targets.Count > 0)
 		{
-			currentTarget = targets.OrderByDescending(target => target.GetParent().GetParent().GetNode<PathFollow2D>("PathFollow2D").ProgressRatio).FirstOrDefault();
+			currentTarget = targets.OrderByDescending(target => ((PathFollow2D)target.GetParent()).ProgressRatio).FirstOrDefault();
 			RotateTowards(currentTarget.GlobalPosition, currDelta);
 		}
 
@@ -77,7 +77,7 @@ public partial class Tower2d : StaticBody2D
 		var currTargets = targets;
 		while (currTargets.Count > 0 && currTargetCount > 0)
 		{
-			currentTarget = currTargets.OrderByDescending(target => target.GetParent().GetParent().GetNode<PathFollow2D>("PathFollow2D").ProgressRatio).FirstOrDefault();
+			currentTarget = currTargets.OrderByDescending(target => ((PathFollow2D)target.GetParent()).ProgressRatio).FirstOrDefault();
 			currAngleDifference = RotateTowards(currentTarget.GlobalPosition, currDelta);
 
 			if (currAngleDifference < fireAngleThreshold)

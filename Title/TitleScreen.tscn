@@ -160,3 +160,5 @@ alignment = 1
 [connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/ButtonSettings" to="." method="_on_button_settings_pressed" flags=18]
 [connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/ButtonExit" to="." method="_on_button_exit_pressed" flags=18]
 [connection signal="pressed" from="PopupPanel/VBoxContainer/HBoxContainer/VBoxContainer/TextureButton" to="." method="_on_popup_button_pressed" flags=18 binds= [1, Vector2i(1152, 648)]]
+[connection signal="pressed" from="PopupPanel/VBoxContainer/HBoxContainer/VBoxContainer2/TextureButton2" to="." method="_on_popup_button_pressed" flags=18 binds= [2, Vector2i(1279, 681)]]
+[connection signal="pressed" from="PopupPanel/VBoxContainer/HBoxContainer/VBoxContainer3/TextureButton3" to="." method="_on_popup_button_pressed" flags=18 binds= [3, Vector2i(1350, 685)]]

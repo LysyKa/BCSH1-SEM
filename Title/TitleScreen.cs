@@ -36,7 +36,7 @@ public partial class TitleScreen : Node2D
 		GetWindow().GetTree().Quit();
 	}
 
-	public void _on_popup_button_pressed(int mapNumber, Vector2I size, Button button)
+	public void _on_popup_button_pressed( Node button, int mapNumber, Vector2I size)
 	{
 		GetWindow().ContentScaleSize = size;
 		// GetWindow().ContentScaleSize = new Vector2I(1600, 800);
@@ -53,6 +53,8 @@ public partial class TitleScreen : Node2D
 				node.Visible = true;
 			}
 		}
+		GD.Print("Mapnumber: " + mapNumber);
+		GD.Print("Button: " + button.Name);
 		GetNode<PopupPanel>("PopupPanel").Hide();
 		this.Hide();
 		GetNode<Camera2D>("/root/Main_Scene/IngameItems/MapLayer0/Camera2D").Enabled = true;
