@@ -1,44 +1,101 @@
 using Godot;
+using Godot.Collections;
 using System;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
+using System.Linq;
+using static Wave;
 
 public partial class Spawner : Node2D
 {
 
 	[Export]
-	private int totalWaves = 5;
+	public int totalWaves = 5;
 	[Export]
-	private int enemyCount = 10;
+	public int enemyCount = 10;
 	[Export]
-	private double timerWaitTime = 0.5;
-	private int currWaveCount = 5;
-	private int currEnemyCount = 10;
+	public double timerWaitTime = 0.5;
+	public int currWaveCount = 5;
+	public int currEnemyCount = 10;
+	public Array<String> paths = new();
+	public List<enemyStats> enemies = new();
+	public Array<int> enemyCounts = new();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		GetNode<Label>("/root/Main_Scene/UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/LabelCurrWave").Text = "Current wave: " + (totalWaves - currWaveCount) + "/" + totalWaves;
+		paths.Resize(3);
+		enemyCounts.Resize(3);
+		GetNode<Label>("/root/Main_Scene/UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/LabelCurrWave").Text = "Current wave: " + currWaveCount + "/" + totalWaves;
+		var notifier = new VisibleOnScreenNotifier2D();
+		AddChild(notifier);//GetNode<VisibilityNotifier2D>("VisibilityNotifier2D");
+		notifier.ScreenEntered += notifierIn;
+		notifier.ScreenExited += notifierOut;
 	}
 
+	public void notifierIn()
+	{
+		GetNode<Button>("/root/Main_Scene/UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/ButtonSpawner").Pressed += _on_button_pressed;
+		askWaveData();
+
+	}
+	public void notifierOut()
+	{
+		GetNode<Button>("/root/Main_Scene/UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/ButtonSpawner").Pressed -= _on_button_pressed;
+	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 	}
 
+	public void setStats(enemyStats stats, Enemy enemy)
+	{
+		enemy.Life = stats.Life;
+		enemy.Damage = stats.Damage;
+		enemy.Bounty = stats.Bounty;
+		enemy.Speed = stats.Speed;
+		enemy.spritePath = stats.path;
+	}
+
 	void _on_timer_timeout()
 	{
-		//GetNode<Timer>("Timer").WaitTime = 0.5;
-		//var path = ResourceLoader.Load<PackedScene>("res://Scenes/pathSceneTest.tscn");
-		var path = GetNode<Path2D>("Path2D");
+		Random random = new Random();
+		int next = random.Next((enemyCounts[0] + enemyCounts[1] + enemyCounts[2]));
+		PackedScene enemyScene = ResourceLoader.Load<PackedScene>("res://Enemies/Enemy.tscn");
+		Enemy enemyInstance = enemyScene.Instantiate<Enemy>();
+		if (next < enemyCounts[0])
+		{
+			enemyCounts[0]--;
+			setStats(enemies.ElementAt(0), enemyInstance);
+
+
+		}
+		else if (next < (enemyCounts[0] + enemyCounts[1]))
+		{
+			enemyCounts[1]--;
+			setStats(enemies.ElementAt(1), enemyInstance);
+
+
+		}
+		else
+		{
+			enemyCounts[2]--;
+			setStats(enemies.ElementAt(2), enemyInstance);
+
+
+		}
+		next = random.Next(3);
+		Path2D path = GetNode<Path2D>(paths[next]);
+		GD.Print(paths[next].ToString());
+		GD.Print(path.ToString());
+		GD.Print(enemyInstance.ToString());
 		var enemyPathFollow = new PathFollow2D();
-		var enemyScene = ResourceLoader.Load<PackedScene>("res://Enemies/Enemy.tscn");
-		var enemyInstance = enemyScene.Instantiate<Enemy>();
+		// var enemyScene = ResourceLoader.Load<PackedScene>("res://Enemies/Enemy.tscn");
+		// var enemyInstance = enemyScene.Instantiate<Enemy>();
 		path.AddChild(enemyPathFollow);
-		for (int i = 0; i < totalWaves - currWaveCount; i++)
+		/*for (int i = 0; i < totalWaves - currWaveCount; i++)
 		{
 			randomizeStats(enemyInstance);
-		}
+		}*/
 		enemyPathFollow.AddChild(enemyInstance);
 		currEnemyCount--;
 		//	GD.Print("Spawned enemy, remaining count: " + enemyCount);
@@ -47,16 +104,25 @@ public partial class Spawner : Node2D
 			SendAnotherWave();
 		}
 	}
+
+	private void askWaveData()
+	{
+		((WaveData)GetParent().GetNode<Node2D>("WaveData")).GetAnotherWave();
+		currEnemyCount = enemyCounts[0] + enemyCounts[1] + enemyCounts[2];
+
+	}
+
 	public void SendAnotherWave()
 	{
+		askWaveData();
 		GetNode<Timer>("Timer").Stop();
-		currEnemyCount = enemyCount;
+		// currEnemyCount = enemyCount;
 		GetNode<Timer>("Timer").Start(5);
 		GetNode<Timer>("Timer").WaitTime = timerWaitTime;
-		currWaveCount--;
-		GetNode<Label>("/root/Main_Scene/UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/LabelCurrWave").Text = "Current wave: " + (totalWaves - currWaveCount) + "/" + totalWaves;
-		GD.Print("Wave " + (totalWaves - currWaveCount) + " completed. Remaining waves: " + currWaveCount);
-		if (currWaveCount <= 0)
+		currWaveCount++;
+		GetNode<Label>("/root/Main_Scene/UICanvasLayer/UIControl/PanelPlayerStats/HBoxContainer/LabelCurrWave").Text = "Current wave: " + currWaveCount + "/" + totalWaves;
+		GD.Print("Wave " + currWaveCount + " completed. Remaining waves: " + (totalWaves - currWaveCount));
+		if (currWaveCount >= totalWaves)
 		{
 			WavesCompleted();
 		}

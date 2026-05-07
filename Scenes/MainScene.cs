@@ -9,6 +9,13 @@ public partial class MainScene : Node2D
 		GetNode<Node2D>("IngameItems").Visible = false;
 		GetNode<Node2D>("PlayerStats").Visible = false;
 		GetNode<CanvasLayer>("UICanvasLayer").Visible = false;
+		foreach (var item in GetNode<Node>("IngameItems").GetChildren())
+		{
+			if (item is TileMapLayer layer)
+			{
+				layer.Visible = false;
+			}
+		}
 		LoadScreen("res://Title/TitleScreen.tscn");
 	}
 

@@ -45,7 +45,7 @@ public partial class Tower2d : StaticBody2D
 		attackTimer = new Timer();
 		if (attackSpeed > 0)attackTimer.WaitTime = 1/attackSpeed; else attackTimer.WaitTime = 0;
 		attackTimer.Timeout += tryShoot;
-		this.AddChild(attackTimer);
+		AddChild(attackTimer);
 		attackTimer.Start();
 	}
 

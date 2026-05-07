@@ -8,8 +8,8 @@ public partial class MainCamera2d : Camera2D
 
 	private bool dragging = false;
 	private Vector2 dragOffset;
-	private float minZoom = 0.4F;
-	private float maxZoom = 2F;
+	private float minZoom = 0.1F;
+	private float maxZoom = 4F;
 
 	public override void _Ready()
 	{

@@ -53,15 +53,15 @@ public partial class TitleScreen : Node2D
 				node.Visible = true;
 			}
 		}
-		GD.Print("Mapnumber: " + mapNumber);
-		GD.Print("Button: " + button.Name);
 		GetNode<PopupPanel>("PopupPanel").Hide();
-		this.Hide();
-		GetNode<Camera2D>("/root/Main_Scene/IngameItems/MapLayer0/Camera2D").Enabled = true;
-		// GetNode<Camera2D>("/root/Main_Scene/IngameItems/MapLayer"+(mapNumber-1).ToString()+"/Camera2D").Enabled = true;
-		GetNode<Camera2D>("/root/Main_Scene/IngameItems/MapLayer0/Camera2D").MakeCurrent();
-		// GetNode<Camera2D>("/root/Main_Scene/IngameItems/MapLayer"+(mapNumber-1).ToString()+"/Camera2D").MakeCurrent();
-		this.QueueFree();
+		Hide();
+		mapNumber--;
+		String pathToMap = "/root/Main_Scene/IngameItems/MapLayer"+mapNumber;
+		GetNode<Camera2D>(pathToMap + "/Camera2D").Enabled = true;
+		GetNode<Camera2D>(pathToMap + "/Camera2D").MakeCurrent();
+		GetNode<TileMapLayer>(pathToMap).Visible = true;
+		
+		QueueFree();
 		// ((Node2D)GetParent()).Hide();
 	}
 

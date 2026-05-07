@@ -51,6 +51,7 @@ theme_override_font_sizes/font_size = 25
 text = "New game"
 
 [node name="ButtonLoadGame" type="Button" parent="CenterContainer/Panel/VBoxContainer" unique_id=586534394]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 disabled = true

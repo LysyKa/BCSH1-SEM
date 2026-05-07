@@ -10,7 +10,6 @@ public partial class ClickableArea2d : Area2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,33 +17,28 @@ public partial class ClickableArea2d : Area2D
 	{
 
 	}
-
 	public override void _InputEvent(Viewport viewport, InputEvent @event, int shapeIdx)
 	{
-		if (this.GetParent() is Tower2d tower && tower.isFake)
+		if (GetParent() is Tower2d tower && tower.isFake)
 		{
 			return;
 		}
 		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
 		{
+
+			if (GetNode<UiControl>("/root/Main_Scene/UICanvasLayer/UIControl").destructMode)
+			{
+				GetParent().QueueFree();
+				return;
+			}
+
+
 			if (mouseEvent.ButtonIndex == MouseButton.Left)
 			{
-				foreach (var towers in GetParent().GetParent().GetChildren())
-				{
-					GD.Print(towers.Name);
-					foreach (var areas in towers.GetChildren())
-					{
-						if (areas is ClickableArea2d)
-						{
-							areas.GetChildren().Clear();
-						}
-					}
-				}
 
-				GD.Print("Tower clicked!");
+
 				draw = true;
 				Radius = (GetParent().GetNode<CollisionShape2D>("TowerArea2D/TowerRangeCollisionShape2D").Shape as CircleShape2D).Radius;
-				GD.Print("Drawing circle with radius: " + Radius);
 
 				GetNode<Panel>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats").Visible = true;
 
@@ -80,7 +74,6 @@ public partial class ClickableArea2d : Area2D
 
 	private void _on_mouse_entered()
 	{
-		GD.Print("Mouse entered");
 		draw = true;
 		Radius = (GetParent().GetNode<CollisionShape2D>("TowerArea2D/TowerRangeCollisionShape2D").Shape as CircleShape2D).Radius;
 
@@ -94,7 +87,6 @@ public partial class ClickableArea2d : Area2D
 
 	private void _on_mouse_exited()
 	{
-		GD.Print("Mouse exited");
 		GetNode<Panel>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats").Visible = false;
 		draw = false;
 		QueueRedraw();

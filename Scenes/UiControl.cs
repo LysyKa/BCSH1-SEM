@@ -3,12 +3,13 @@ using System;
 
 public partial class UiControl : Control
 {
-	ButtonGroup buttonGroupTowers;
-	ButtonGroup buttonGroupSpeed;
+	public ButtonGroup buttonGroupTowers;
+	public ButtonGroup buttonGroupSpeed;
 
-	bool simulateTower = false;
-	Tower2d currTower;
-	bool lastState = false;
+	public bool simulateTower = false;
+	public Tower2d currTower;
+	public bool lastState = false;
+	public bool destructMode = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -17,10 +18,8 @@ public partial class UiControl : Control
 		buttonGroupSpeed = new ButtonGroup();
 		foreach (Button button in GetNode("PanelPlayerStats/HBoxContainer/HBoxContainer/").GetChildren())
 		{
-			GD.Print(button.Name);
 			if (button is Button btn)
 			{
-				GD.Print(btn.Name);
 				btn.ButtonGroup = buttonGroupSpeed;
 			}
 		}
@@ -54,6 +53,20 @@ public partial class UiControl : Control
 	{
 		var pabel = GetNode<Panel>("PanelTowerBuild");
 		pabel.Visible = !pabel.Visible;
+	}
+	public void _on_button_destruct_pressed()
+	{
+		destructMode = !destructMode;
+
+		if (destructMode)
+		{
+			var tex = GD.Load<Texture2D>("res://ZPics/kenney_tower-defense-top-down/PNG/new/bomb.png");
+			// Input.SetCustomMouseCursor(tex);
+		}
+		else
+		{
+			Input.SetCustomMouseCursor(null);
+		}
 	}
 
 	public void _on_button_tower_pressed(BaseButton button)
@@ -196,7 +209,29 @@ public partial class UiControl : Control
 		{
 			if (mouseEvent.Pressed)
 			{
+				// Debugging this for hours before giving up and then noticing that return was IN the for cycle instead of outside week later
+				/*	if (destructMode && currTower is null && (mouseEvent.ButtonIndex == MouseButton.Left || mouseEvent.ButtonIndex == MouseButton.Right))
+					{
+						var space = GetWorld2D().DirectSpaceState;
+						var query = new PhysicsPointQueryParameters2D
+						{
+							Position = GetViewport().GetCamera2D().GetGlobalMousePosition(),
+							CollideWithAreas = true,
+							CollisionMask = uint.MaxValue
+						};
 
+						var result = space.IntersectPoint(query);
+						foreach (var hit in result)
+						{
+							if (hit["collider"].As<Node2D>() is Area2D clickableArea && clickableArea.IsInGroup("clickable"))
+							{
+								GD.Print(clickableArea.Name);
+								GetParent().GetParent().GetNode<Node2D>("./IngameItems/TowerContainer").RemoveChild(clickableArea.GetParent());
+							}
+							//return;
+						}
+						return;
+					}*/
 				if (mouseEvent.ButtonIndex == MouseButton.Left && currTower != null
 				&& !GetNode<Panel>("PanelTowerBuild").GetGlobalRect().HasPoint(GetGlobalMousePosition())
 				&& !GetNode<Panel>("PanelPlayerStats").GetGlobalRect().HasPoint(GetGlobalMousePosition())
@@ -205,7 +240,10 @@ public partial class UiControl : Control
 					if (currTower.cost <= GetNode<PlayerStats>("/root/Main_Scene/PlayerStats").playerGold)
 					{
 						currTower.isFake = false;
-						currTower.Position = GetParent().GetParent().GetNode<MapLayer0>("IngameItems/MapLayer0").ChangeVectorToLocal(currTower.GlobalPosition);
+						currTower.Position = GetViewport().GetCamera2D().GetGlobalMousePosition();
+
+
+						//currTower.Position = GetParent().GetParent().GetNode<MapLayer0>("IngameItems/MapLayer0").ChangeVectorToLocal(currTower.GlobalPosition);
 						GetNode<PlayerStats>("/root/Main_Scene/PlayerStats").playerGold -= currTower.cost;
 						GetNode<PlayerStats>("/root/Main_Scene/PlayerStats").updateGold();
 						currTower = null;
@@ -228,10 +266,10 @@ public partial class UiControl : Control
 					simulateTower = false;
 					GetNode<Panel>("/root/Main_Scene/UICanvasLayer/UIControl/PanelTowerStats").Visible = false;
 				}
-				else
+				/*else
 				{
 					//GD.Print("Test");
-				}
+				}*/
 			}
 		}
 	}

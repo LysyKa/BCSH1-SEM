@@ -4,19 +4,14 @@
 [ext_resource type="Script" uid="uid://2web7y263xxv" path="res://Towers/Tower2d.cs" id="1_wrv0c"]
 [ext_resource type="Script" uid="uid://cbn2qe7ebvuw4" path="res://Towers/ClickableArea2d.cs" id="3_asovx"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kxyhy"]
-radius = 300.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrv0c"]
 size = Vector2(86, 84)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_kxyhy"]
+radius = 300.0
+
 [node name="StaticBody2D" type="StaticBody2D" unique_id=2041537880]
 script = ExtResource("1_wrv0c")
-
-[node name="TowerArea2D" type="Area2D" parent="." unique_id=588980916]
-
-[node name="TowerRangeCollisionShape2D" type="CollisionShape2D" parent="TowerArea2D" unique_id=260122331]
-shape = SubResource("CircleShape2D_kxyhy")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=2934374]
 rotation = 1.5707964
@@ -27,11 +22,18 @@ texture = ExtResource("1_kxyhy")
 position = Vector2(60, 0)
 
 [node name="ClickableArea2D" type="Area2D" parent="." unique_id=343378499]
+position = Vector2(0, 1)
 script = ExtResource("3_asovx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea2D" unique_id=1120222131]
 position = Vector2(-13, 0)
 shape = SubResource("RectangleShape2D_wrv0c")
+
+[node name="TowerArea2D" type="Area2D" parent="." unique_id=588980916]
+monitorable = false
+
+[node name="TowerRangeCollisionShape2D" type="CollisionShape2D" parent="TowerArea2D" unique_id=260122331]
+shape = SubResource("CircleShape2D_kxyhy")
 
 [connection signal="mouse_entered" from="ClickableArea2D" to="ClickableArea2D" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ClickableArea2D" to="ClickableArea2D" method="_on_mouse_exited"]
