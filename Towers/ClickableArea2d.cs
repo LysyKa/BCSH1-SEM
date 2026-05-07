@@ -36,7 +36,8 @@ public partial class ClickableArea2d : Area2D
 			if (mouseEvent.ButtonIndex == MouseButton.Left)
 			{
 
-
+				var ripple = GetParent().GetNode<GpuParticles2D>("Ripple");
+				ripple.Restart();
 				draw = true;
 				Radius = (GetParent().GetNode<CollisionShape2D>("TowerArea2D/TowerRangeCollisionShape2D").Shape as CircleShape2D).Radius;
 
@@ -74,6 +75,7 @@ public partial class ClickableArea2d : Area2D
 
 	private void _on_mouse_entered()
 	{
+
 		draw = true;
 		Radius = (GetParent().GetNode<CollisionShape2D>("TowerArea2D/TowerRangeCollisionShape2D").Shape as CircleShape2D).Radius;
 

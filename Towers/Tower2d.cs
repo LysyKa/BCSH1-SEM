@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 
 public partial class Tower2d : StaticBody2D
 {
@@ -25,7 +26,7 @@ public partial class Tower2d : StaticBody2D
 	public double fireAngleThreshold = 0.1D; // how close to target angle before firing
 	[Export]
 	public float projectileSpeed = 0.1F; // how close to target angle before firing
-	public Timer attackTimer;
+	public Godot.Timer attackTimer;
 	private double currDelta;
 	private double currAngleDifference;
 
@@ -42,7 +43,7 @@ public partial class Tower2d : StaticBody2D
 	{
 		GetNode<Area2D>("TowerArea2D").GetNode<CollisionShape2D>("TowerRangeCollisionShape2D").Shape = new CircleShape2D() { Radius = range };
 		GetNode<Sprite2D>("Sprite").Texture = ResourceLoader.Load<Texture2D>(spritePath);
-		attackTimer = new Timer();
+		attackTimer = new Godot.Timer();
 		if (attackSpeed > 0)attackTimer.WaitTime = 1/attackSpeed; else attackTimer.WaitTime = 0;
 		attackTimer.Timeout += tryShoot;
 		AddChild(attackTimer);
@@ -89,11 +90,21 @@ public partial class Tower2d : StaticBody2D
 				proj.spritePath = projectilePath;
 				proj.Speed = projectileSpeed;
 				GetParent().AddChild(proj);
+				//PlayRecoil();
 			}
 			currTargets.Remove(currentTarget);
 			currTargetCount--;
 		}
 	}
+
+	public void PlayRecoil()
+{
+    var tween = CreateTween();
+	var start = this.RotationDegrees;
+    tween.TweenProperty(this, "rotation_degrees", start - 5f, 0.1);
+	tween.TweenProperty(this, "rotation_degrees", start, 0.08).SetDelay(0.04);
+    // tween.TweenProperty(this, "rotation_degrees", 0, 0.1).SetDelay(0.05);
+}
 	private double RotateTowards(Vector2 targetPosition, double delta)
 	{
 		// Vector2 direction = targetPosition - GlobalPosition;

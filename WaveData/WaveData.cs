@@ -20,16 +20,16 @@ public partial class WaveData : Node2D
 
 	public void GetAnotherWave()
 	{
-		GD.Print("Cur wave:" + currentWave);
+		GD.Print(this.GetChildCount());
+		GD.Print("Cur wave:" + (currentWave));
+		if (currentWave >= GetChildCount())
+		{
+			return;
+		}
 		var child = GetChild<Wave>(currentWave);
-		GD.Print("Enems: " + child.enemies.ToString());
 		spawner.enemies = child.enemies;	
 		spawner.enemyCounts = child.enemyCounts;
-		GD.Print(child.enemyCounts.ToString());
-
 		spawner.paths = child.paths;
-		GD.Print(child.paths.ToString());
-
 		spawner.currWaveCount = currentWave;
 		currentWave++;
 	}

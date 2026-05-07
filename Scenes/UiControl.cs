@@ -176,7 +176,7 @@ public partial class UiControl : Control
 		String path = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile291.png";
 		String projectileSpritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile272.png";
 
-		currTower = createTower(attackSpeed: 5, bulletDamage: 2, targetCount: 1, range: 250, cost: 30, fireAngle: 0.05D, spritePath: path, projectileSpritePath: projectileSpritePath);
+		currTower = createTower(attackSpeed: 5, bulletDamage: 2, targetCount: 1, range: 300, cost: 30, fireAngle: 0.05D, spritePath: path, projectileSpritePath: projectileSpritePath);
 
 		GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
 	}
@@ -186,7 +186,7 @@ public partial class UiControl : Control
 		String path = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile292.png";
 		String projectileSpritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile273.png";
 
-		currTower = createTower(attackSpeed: 10, bulletDamage: 2, targetCount: 2, range: 200, cost: 50, fireAngle: 0.05D, spritePath: path, projectileSpritePath: projectileSpritePath);
+		currTower = createTower(attackSpeed: 10, bulletDamage: 2, targetCount: 2, range: 250, cost: 50, fireAngle: 0.05D, spritePath: path, projectileSpritePath: projectileSpritePath);
 
 
 		GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
@@ -197,7 +197,7 @@ public partial class UiControl : Control
 		String path = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile226.png";
 		String projectileSpritePath = "res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile296.png";
 
-		currTower = createTower(attackSpeed: 1, bulletDamage: 1, targetCount: 1, range: 400, cost: 100, fireAngle: 0.1D, spritePath: path, projectileSpritePath: projectileSpritePath, projectileSpeed: 200F);
+		currTower = createTower(attackSpeed: 1, bulletDamage: 100, targetCount: 1, range: 400, cost: 100, fireAngle: 0.1D, spritePath: path, projectileSpritePath: projectileSpritePath, projectileSpeed: 200F);
 
 
 		GetNode<Node2D>("/root/Main_Scene/IngameItems/TowerContainer").AddChild(currTower);
@@ -250,6 +250,7 @@ public partial class UiControl : Control
 						buttonGroupTowers.GetPressedButton().ButtonPressed = false;
 						lastState = false;
 						simulateTower = false;
+						// currTower.GetNode<GpuParticles2D>("Ripple").Restart();
 					}
 					else
 					{
@@ -276,7 +277,6 @@ public partial class UiControl : Control
 	public void _on_button_speedup_pressed(BaseButton button)
 	{
 
-		GD.Print("It works");
 		if (button.Name.Equals("ButtonPause"))
 		{
 			Engine.TimeScale = 0f;

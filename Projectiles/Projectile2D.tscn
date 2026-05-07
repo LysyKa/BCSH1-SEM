@@ -10,6 +10,29 @@ height = 32.0
 radius = 13.0
 height = 40.0
 
+[sub_resource type="Gradient" id="Gradient_a4pyg"]
+offsets = PackedFloat32Array(0.21804512, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_asovx"]
+gradient = SubResource("Gradient_a4pyg")
+
+[sub_resource type="Curve" id="Curve_u2r6n"]
+_data = [Vector2(0.27096775, 0.38823533), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_03vit"]
+width = 564
+curve = SubResource("Curve_u2r6n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_omdsg"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+scale_min = 0.0
+scale_max = 19.779999
+scale_curve = SubResource("CurveTexture_03vit")
+color_ramp = SubResource("GradientTexture1D_asovx")
+
 [node name="ProjectileMissile" type="CharacterBody2D" unique_id=33349892]
 script = ExtResource("1_a4pyg")
 
@@ -26,3 +49,10 @@ shape = SubResource("CapsuleShape2D_a4pyg")
 [node name="Sprite" type="Sprite2D" parent="." unique_id=615247041]
 rotation = 1.5707964
 texture = ExtResource("1_67ack")
+
+[node name="Ripple" type="GPUParticles2D" parent="." unique_id=18382981]
+position = Vector2(-18, 0)
+rotation = 3.1136675
+amount = 10
+lifetime = 0.6
+process_material = SubResource("ParticleProcessMaterial_omdsg")

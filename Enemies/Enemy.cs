@@ -28,7 +28,7 @@ public partial class Enemy : CharacterBody2D
 				//GD.Print("Enemy died");
 				EmitSignal(SignalName.EnemyDied, Bounty);
 				// GetParent().RemoveChild(this);
-				QueueFree();
+				this.GetParent().QueueFree();
 				return;
 			}
 			EmitSignal(SignalName.HealthChanged);
@@ -69,6 +69,8 @@ public partial class Enemy : CharacterBody2D
 	{
 		GetNode<Sprite2D>("Sprite").Texture = ResourceLoader.Load<Texture2D>(spritePath);
 		((PathFollow2D)GetParent()).Progress = 1;
+		((PathFollow2D)GetParent()).Loop = false;
+		
 		Speed = Speed + (int)(GD.Randf() * 2 - 1); // Randomize speed a bit
 		Connect(SignalName.EnemyDied, new Callable(GetNode<Node2D>("/root/Main_Scene/PlayerStats"), "_enemyDiedEventHandler"));
 		Connect(SignalName.EnemyPassed, new Callable(GetNode<Node2D>("/root/Main_Scene/PlayerStats"), "_enemyPassedEventHandler"));
@@ -87,7 +89,7 @@ public partial class Enemy : CharacterBody2D
 			//GD.Print("Enemy reached the end of the path");
 			EmitSignal(SignalName.EnemyPassed, Damage);
 			//GetParent().RemoveChild(this);
-			QueueFree();
+			this.GetParent().QueueFree();
 		}
 	}
 

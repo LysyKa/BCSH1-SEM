@@ -936,9 +936,6 @@ rendering_quadrant_size = 64
 position = Vector2(0, 97)
 script = ExtResource("4_6ev3c")
 
-[node name="Timer" type="Timer" parent="IngameItems/MapLayer0/Spawner" unique_id=532096088]
-wait_time = 0.5
-
 [node name="Path2D" parent="IngameItems/MapLayer0/Spawner" unique_id=1310370462 instance=ExtResource("8_psl12")]
 
 [node name="Path2DFlyBy" type="Path2D" parent="IngameItems/MapLayer0/Spawner" unique_id=1167762045]
@@ -1015,11 +1012,9 @@ tile_set = SubResource("TileSet_2ebs2")
 rendering_quadrant_size = 64
 
 [node name="Spawner" type="Node2D" parent="IngameItems/MapLayer1" unique_id=1080521251]
+visible = false
 position = Vector2(898.166, 0)
 script = ExtResource("4_6ev3c")
-
-[node name="Timer" type="Timer" parent="IngameItems/MapLayer1/Spawner" unique_id=534524611]
-wait_time = 0.5
 
 [node name="Path2D" type="Path2D" parent="IngameItems/MapLayer1/Spawner" unique_id=1825964605]
 curve = SubResource("Curve2D_2ebs2")
@@ -1028,6 +1023,32 @@ curve = SubResource("Curve2D_2ebs2")
 curve = SubResource("Curve2D_oyb3p")
 
 [node name="WaveData" type="Node2D" parent="IngameItems/MapLayer1" unique_id=210259752]
+script = ExtResource("9_jvnna")
+
+[node name="Wave1" type="Node2D" parent="IngameItems/MapLayer1/WaveData" unique_id=171005408]
+script = ExtResource("10_b48ew")
+pathName1 = "Path2D2"
+pathName2 = "Path2D2"
+pathName3 = "Path2D2"
+
+[node name="Wave2" type="Node2D" parent="IngameItems/MapLayer1/WaveData" unique_id=779052310]
+script = ExtResource("10_b48ew")
+
+[node name="Wave3" type="Node2D" parent="IngameItems/MapLayer1/WaveData" unique_id=596328021]
+script = ExtResource("10_b48ew")
+
+[node name="Wave4" type="Node2D" parent="IngameItems/MapLayer1/WaveData" unique_id=1835232703]
+script = ExtResource("10_b48ew")
+
+[node name="Wave5" type="Node2D" parent="IngameItems/MapLayer1/WaveData" unique_id=1415883199]
+script = ExtResource("10_b48ew")
+
+[node name="Wave6" type="Node2D" parent="IngameItems/MapLayer1/WaveData" unique_id=1410523874]
+script = ExtResource("10_b48ew")
+
+[node name="Wave7" type="Node2D" parent="IngameItems/MapLayer1/WaveData" unique_id=1190078985]
+script = ExtResource("10_b48ew")
+pathName2 = "Path2D2"
 
 [node name="TowerContainer" type="Node2D" parent="IngameItems" unique_id=979497302]
 script = ExtResource("6_huasi")
@@ -1397,7 +1418,7 @@ expand_icon = true
 [node name="Label" type="Label" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer5/VBoxContainer4" unique_id=1508169773]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Splash Tower"
+text = "Big Tower"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/UIControl/PanelTowerBuild/HBoxContainer/MarginContainer5/VBoxContainer4" unique_id=2089180766]
 layout_mode = 2
@@ -1415,7 +1436,5 @@ layout_mode = 2
 [node name="PlayerStats" type="Node2D" parent="." unique_id=532140308]
 script = ExtResource("8_m1efj")
 
-[connection signal="timeout" from="IngameItems/MapLayer0/Spawner/Timer" to="IngameItems/MapLayer0/Spawner" method="_on_timer_timeout"]
-[connection signal="timeout" from="IngameItems/MapLayer1/Spawner/Timer" to="IngameItems/MapLayer1/Spawner" method="_on_timer_timeout"]
 [connection signal="pressed" from="UICanvasLayer/UIControl/ButtonBuild" to="UICanvasLayer/UIControl" method="_on_button_build_pressed"]
 [connection signal="pressed" from="UICanvasLayer/UIControl/ButtonDestruct" to="UICanvasLayer/UIControl" method="_on_button_destruct_pressed"]
