@@ -4,6 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://cwvdql7u5ad0x" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile199.png" id="2_8a8s5"]
 [ext_resource type="Texture2D" uid="uid://b0v7sgigcri7y" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile202.png" id="3_n47r1"]
 [ext_resource type="Texture2D" uid="uid://fi12nqkv1146" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile201.png" id="4_qrids"]
+[ext_resource type="Texture2D" uid="uid://b6ym04pwgipx3" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile276.png" id="5_erj00"]
+[ext_resource type="Texture2D" uid="uid://bry285jogt1k6" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile277.png" id="6_iu6ow"]
+[ext_resource type="Texture2D" uid="uid://cb4t54mnselvh" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile278.png" id="7_03une"]
+[ext_resource type="Texture2D" uid="uid://dv1e7xwkm6muo" path="res://ZPics/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile279.png" id="8_ktaak"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r5agj"]
 bg_color = Color(0.39537415, 0.635122, 0.7622568, 1)
@@ -13,6 +17,12 @@ bg_color = Color(0.7520948, 0.56177884, 0.26697403, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8a8s5"]
 bg_color = Color(0.13007328, 0.24195217, 0.43519747, 0.7607843)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n47r1"]
+bg_color = Color(0.12941177, 0.24313726, 0.43529412, 0.7607843)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrids"]
+bg_color = Color(0.12941177, 0.24313726, 0.43529412, 0.7607843)
 
 [node name="TitleScreen" type="Node2D" unique_id=777051287]
 script = ExtResource("1_2tuh7")
@@ -42,8 +52,10 @@ alignment = 1
 [node name="LabelNameOfDaGame" type="Label" parent="CenterContainer/Panel/VBoxContainer" unique_id=428967814]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
-text = "Pojmenovaná(surely)
- tower defense"
+text = "Yet another modern
+       tower defense      "
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ButtonNewGame" type="Button" parent="CenterContainer/Panel/VBoxContainer" unique_id=1909917020]
 layout_mode = 2
@@ -83,7 +95,6 @@ limit_bottom = 600
 oversampling_override = 1.0
 initial_position = 2
 size = Vector2i(620, 462)
-visible = true
 always_on_top = true
 theme_override_styles/panel = SubResource("StyleBoxFlat_8a8s5")
 
@@ -137,6 +148,7 @@ theme_override_font_sizes/font_size = 22
 text = "Beach Rest"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="PopupPanel/VBoxContainer/HBoxContainer" unique_id=1913086717]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 20
 
@@ -155,6 +167,138 @@ text = "Ocean Paradise"
 layout_mode = 2
 alignment = 1
 
+[node name="UpgradesPopupPanel" type="PopupPanel" parent="." unique_id=1884418737]
+oversampling_override = 1.0
+initial_position = 2
+size = Vector2i(620, 460)
+always_on_top = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_n47r1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradesPopupPanel" unique_id=1500638527]
+offset_right = 620.0
+offset_bottom = 460.0
+
+[node name="Label2" type="Label" parent="UpgradesPopupPanel/VBoxContainer" unique_id=1378364966]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="UpgradesPopupPanel/VBoxContainer" unique_id=49486862]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Upgrades"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UpgradesPopupPanel/VBoxContainer" unique_id=632883006]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="UpgradesPopupPanel/VBoxContainer" unique_id=36338189]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradesPopupPanel/VBoxContainer" unique_id=273882810]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="UpgradesPopupPanel/VBoxContainer/HBoxContainer" unique_id=648872319]
+layout_mode = 2
+tooltip_text = "Upgrade Zero: 
+Starting gold is doubled
+Cost: 500 Score"
+toggle_mode = true
+texture_normal = ExtResource("5_erj00")
+
+[node name="TextureButton2" type="TextureButton" parent="UpgradesPopupPanel/VBoxContainer/HBoxContainer" unique_id=997425968]
+layout_mode = 2
+tooltip_text = "Upgrade One:
+Your maximum lives are doubled
+Cost: 2500 score"
+texture_normal = ExtResource("6_iu6ow")
+
+[node name="TextureButton3" type="TextureButton" parent="UpgradesPopupPanel/VBoxContainer/HBoxContainer" unique_id=787309023]
+layout_mode = 2
+tooltip_text = "Upgrade Two:
+All towers are sold for full price
+Cost: 10000 score"
+texture_normal = ExtResource("7_03une")
+
+[node name="TextureButton4" type="TextureButton" parent="UpgradesPopupPanel/VBoxContainer/HBoxContainer" unique_id=749901002]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("8_ktaak")
+
+[node name="Label5" type="Label" parent="UpgradesPopupPanel/VBoxContainer" unique_id=2121872487]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="UpgradesPopupPanel/VBoxContainer" unique_id=1916692211]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="UpgradesPopupPanel/VBoxContainer" unique_id=573313466]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Close"
+
+[node name="SettingsPopupPanel" type="PopupPanel" parent="." unique_id=2084163055]
+oversampling_override = 1.0
+initial_position = 2
+size = Vector2i(620, 460)
+always_on_top = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_qrids")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPopupPanel" unique_id=2122804295]
+offset_right = 620.0
+offset_bottom = 460.0
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsPopupPanel/VBoxContainer" unique_id=1530888610]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsPopupPanel/VBoxContainer/HBoxContainer" unique_id=1364878234]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Disable Sound"
+
+[node name="CheckBox" type="CheckBox" parent="SettingsPopupPanel/VBoxContainer/HBoxContainer" unique_id=1561216063]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+
+[node name="Label2" type="Label" parent="SettingsPopupPanel/VBoxContainer" unique_id=916847649]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="SettingsPopupPanel/VBoxContainer" unique_id=1946339328]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="SettingsPopupPanel/VBoxContainer" unique_id=912238913]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="SettingsPopupPanel/VBoxContainer" unique_id=68740931]
+layout_mode = 2
+
+[node name="Label6" type="Label" parent="SettingsPopupPanel/VBoxContainer" unique_id=756185629]
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="SettingsPopupPanel/VBoxContainer" unique_id=1606910864]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="SettingsPopupPanel/VBoxContainer" unique_id=1578076696]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Close"
+
 [connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/ButtonNewGame" to="." method="_on_button_new_game_pressed" flags=18]
 [connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/ButtonLoadGame" to="." method="_on_button_load_game_pressed" flags=18]
 [connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/ButtonUpgrades" to="." method="_on_button_upgrades_pressed" flags=18]
@@ -162,4 +306,10 @@ alignment = 1
 [connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/ButtonExit" to="." method="_on_button_exit_pressed" flags=18]
 [connection signal="pressed" from="PopupPanel/VBoxContainer/HBoxContainer/VBoxContainer/TextureButton" to="." method="_on_popup_button_pressed" flags=18 binds= [1, Vector2i(1152, 648)]]
 [connection signal="pressed" from="PopupPanel/VBoxContainer/HBoxContainer/VBoxContainer2/TextureButton2" to="." method="_on_popup_button_pressed" flags=18 binds= [2, Vector2i(1279, 681)]]
-[connection signal="pressed" from="PopupPanel/VBoxContainer/HBoxContainer/VBoxContainer3/TextureButton3" to="." method="_on_popup_button_pressed" flags=18 binds= [3, Vector2i(1350, 685)]]
+[connection signal="pressed" from="PopupPanel/VBoxContainer/HBoxContainer/VBoxContainer3/TextureButton3" to="." method="_on_popup_button_pressed" flags=18 binds= [3, Vector2i(1279, 1000)]]
+[connection signal="pressed" from="UpgradesPopupPanel/VBoxContainer/HBoxContainer/TextureButton" to="." method="_on_button_upgrade0_pressed" flags=18]
+[connection signal="pressed" from="UpgradesPopupPanel/VBoxContainer/HBoxContainer/TextureButton2" to="." method="_on_button_upgrade1_pressed" flags=18]
+[connection signal="pressed" from="UpgradesPopupPanel/VBoxContainer/HBoxContainer/TextureButton3" to="." method="_on_button_upgrade2_pressed" flags=18]
+[connection signal="pressed" from="UpgradesPopupPanel/VBoxContainer/Button" to="." method="_on_button_close_pressed" flags=18]
+[connection signal="pressed" from="SettingsPopupPanel/VBoxContainer/HBoxContainer/CheckBox" to="." method="_on_checkbox_sound_pressed" flags=18]
+[connection signal="pressed" from="SettingsPopupPanel/VBoxContainer/Button" to="." method="_on_button_close_pressed" flags=18]

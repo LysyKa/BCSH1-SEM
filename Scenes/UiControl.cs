@@ -210,6 +210,7 @@ public partial class UiControl : Control
 			if (mouseEvent.Pressed)
 			{
 				// Debugging this for hours before giving up and then noticing that return was IN the for cycle instead of outside week later
+				// can be expanded later
 				/*	if (destructMode && currTower is null && (mouseEvent.ButtonIndex == MouseButton.Left || mouseEvent.ButtonIndex == MouseButton.Right))
 					{
 						var space = GetWorld2D().DirectSpaceState;
@@ -293,5 +294,10 @@ public partial class UiControl : Control
 			GD.Print("Running at double speed");
 
 		}
+	}
+		public void _on_button_sound_pressed(Button button)
+	{
+		AudioServer.SetBusMute(AudioServer.GetBusIndex("Master"), !AudioServer.IsBusMute(AudioServer.GetBusIndex("Master")));
+		GD.Print($"Audiobus Mute is now {AudioServer.IsBusMute(AudioServer.GetBusIndex("Master"))}");
 	}
 }

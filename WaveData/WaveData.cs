@@ -20,8 +20,8 @@ public partial class WaveData : Node2D
 
 	public void GetAnotherWave()
 	{
-		GD.Print(this.GetChildCount());
-		GD.Print("Cur wave:" + (currentWave));
+		// GD.Print(this.GetChildCount());
+		// GD.Print("Cur wave:" + (currentWave));
 		if (currentWave >= GetChildCount())
 		{
 			return;

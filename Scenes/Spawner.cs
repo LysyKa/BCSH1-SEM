@@ -64,8 +64,9 @@ public partial class Spawner : Node2D
 	public async void ShowWaveBanner(string text)
 	{
 		var panel = new Panel();
-		panel.Size = new Vector2(400, 100); // adjust as needed
-		panel.Modulate = new Color(1, 1, 1, 0); // start invisible
+		panel.Size = new Vector2(400, 100);
+		panel.Modulate = new Color(1, 1, 1, 0);
+		panel.CustomMinimumSize = new Vector2(400, 100);
 
 		panel.AddThemeStyleboxOverride("panel", new StyleBoxFlat()
 		{
@@ -77,11 +78,20 @@ public partial class Spawner : Node2D
 		});
 
 		var label = new Label();
+
 		label.Text = text;
 		label.HorizontalAlignment = HorizontalAlignment.Center;
 		label.VerticalAlignment = VerticalAlignment.Center;
 		label.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
 		label.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
+		label.AnchorLeft = 0;
+		label.AnchorTop = 0;
+		label.AnchorRight = 1;
+		label.AnchorBottom = 1;
+		label.OffsetLeft = 0;
+		label.OffsetTop = 0;
+		label.OffsetRight = 0;
+		label.OffsetBottom = 0;
 		label.AddThemeFontSizeOverride("font_size", 32);
 		panel.AddChild(label);
 
@@ -125,18 +135,6 @@ public partial class Spawner : Node2D
 	}
 	void _on_timer_timeout()
 	{
-
-
-		/*sif (finished)
-		{
-			return;
-		}
-		if (spawnLocked)
-			return;
-		spawnLocked = true;
-		// Unlock at end of frame
-		*/
-
 		int next = rng.Next((enemyCounts[0] + enemyCounts[1] + enemyCounts[2]));
 		PackedScene enemyScene = ResourceLoader.Load<PackedScene>("res://Enemies/Enemy.tscn");
 		Enemy enemyInstance = enemyScene.Instantiate<Enemy>();
@@ -145,28 +143,20 @@ public partial class Spawner : Node2D
 		{
 			enemyCounts[0]--;
 			setStats(enemies.ElementAt(0), enemyInstance);
-
-
 		}
 		else if (next < (enemyCounts[0] + enemyCounts[1]))
 		{
 			enemyCounts[1]--;
 			setStats(enemies.ElementAt(1), enemyInstance);
-
-
 		}
 		else
 		{
 			enemyCounts[2]--;
 			setStats(enemies.ElementAt(2), enemyInstance);
-
-
 		}
 		next = rng.Next(3);
 		Path2D path = GetNode<Path2D>(paths[next]);
 		var enemyPathFollow = new PathFollow2D();
-		// var enemyScene = ResourceLoader.Load<PackedScene>("res://Enemies/Enemy.tscn");
-		// var enemyInstance = enemyScene.Instantiate<Enemy>();
 		path.AddChild(enemyPathFollow);
 		/*for (int i = 0; i < totalWaves - currWaveCount; i++)
 		{
@@ -179,14 +169,12 @@ public partial class Spawner : Node2D
 		{
 			SendAnotherWave();
 		}
-		//CallDeferred(nameof(UnlockSpawn));
 	}
 
 	private void askWaveData()
 	{
-		GD.Print("Asked");
 		((WaveData)GetParent().GetNode<Node2D>("WaveData")).GetAnotherWave();
-		ShowWaveBanner(("Wave " + (currWaveCount +1)+ " incoming!"));
+		ShowWaveBanner(("Wave " + (currWaveCount + 1) + " incoming!"));
 		currEnemyCount = enemyCounts[0] + enemyCounts[1] + enemyCounts[2];
 
 	}
@@ -236,6 +224,7 @@ public partial class Spawner : Node2D
 	void _on_finished()
 	{
 		ShowWaveBanner("Congratulations! You won!");
+		GetNode<PlayerStats>("/root/Main_Scene/PlayerStats").onFinished();
 	}
 
 	public CharacterBody2D randomizeStats(Enemy enemy)

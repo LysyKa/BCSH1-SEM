@@ -46,24 +46,6 @@ public partial class Enemy : CharacterBody2D
 	[Signal]
 	public delegate void EnemyPassedEventHandler(int damage);
 
-	/*public Enemy(int damage, int speed, int bounty, int life)
-	{
-		this.Damage = damage;
-		this.Speed = speed;
-		this.Bounty = bounty;
-		this.life = life;
-	}
-	public Enemy(int damage, int speed, int bounty, int life, String spritepath)
-	{
-		this.Damage = damage;
-		this.Speed = speed;
-		this.Bounty = bounty;
-		this.Life = life;
-		this.spritePath = spritepath;
-	}*/
-
-
-
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

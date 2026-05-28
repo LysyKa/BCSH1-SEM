@@ -27,19 +27,41 @@ public partial class TitleScreen : Node2D
 	}
 	public void _on_button_upgrades_pressed(Button button)
 	{
+		GetNode<PopupPanel>("UpgradesPopupPanel").Popup();
 	}
 	public void _on_button_settings_pressed(Button button)
 	{
+		GetNode<PopupPanel>("SettingsPopupPanel").Popup();
 	}
 	public void _on_button_exit_pressed(Button button)
 	{
 		GetWindow().GetTree().Quit();
 	}
-
-	public void _on_popup_button_pressed( Node button, int mapNumber, Vector2I size)
+	public void _on_button_upgrade0_pressed(TextureButton button)
+	{
+		GetNode<PlayerStats>("/root/Main_Scene/PlayerStats").updateUpgrades(0, true, 500);
+	}
+	public void _on_button_upgrade1_pressed(TextureButton button)
+	{
+		GetNode<PlayerStats>("/root/Main_Scene/PlayerStats").updateUpgrades(1, true, 2500);
+	}
+	public void _on_button_upgrade2_pressed(TextureButton button)
+	{
+		GetNode<PlayerStats>("/root/Main_Scene/PlayerStats").updateUpgrades(2, true, 10000);
+	}
+	public void _on_button_close_pressed(Button button)
+	{
+		button.GetParent().GetParent<PopupPanel>().Visible = false;
+	}
+	public void _on_checkbox_sound_pressed(Button button)
+	{
+		AudioServer.SetBusMute(AudioServer.GetBusIndex("Master"), !AudioServer.IsBusMute(AudioServer.GetBusIndex("Master")));
+		GD.Print($"Audiobus Mute is now {AudioServer.IsBusMute(AudioServer.GetBusIndex("Master"))}");
+	}
+	
+	public void _on_popup_button_pressed(Node button, int mapNumber, Vector2I size)
 	{
 		GetWindow().ContentScaleSize = size;
-		// GetWindow().ContentScaleSize = new Vector2I(1600, 800);
 
 		var mainScene = GetNode<Node2D>("/root/Main_Scene");
 		foreach (var item in mainScene.GetChildren())
@@ -56,13 +78,12 @@ public partial class TitleScreen : Node2D
 		GetNode<PopupPanel>("PopupPanel").Hide();
 		Hide();
 		mapNumber--;
-		String pathToMap = "/root/Main_Scene/IngameItems/MapLayer"+mapNumber;
+		String pathToMap = "/root/Main_Scene/IngameItems/MapLayer" + mapNumber;
 		GetNode<Camera2D>(pathToMap + "/Camera2D").Enabled = true;
 		GetNode<Camera2D>(pathToMap + "/Camera2D").MakeCurrent();
 		GetNode<TileMapLayer>(pathToMap).Visible = true;
-		
+
 		QueueFree();
-		// ((Node2D)GetParent()).Hide();
 	}
 
 }

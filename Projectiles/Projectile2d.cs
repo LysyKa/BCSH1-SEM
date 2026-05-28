@@ -62,7 +62,6 @@ public partial class Projectile2d : CharacterBody2D
 				}
 			} else if (!IsInstanceValid(CurrentTarget) || CurrentTarget.IsQueuedForDeletion())
 			{
-				// lastPosition = CurrentTarget.GlobalPosition;
 				if (lastPosition == Vector2.Zero)
 				{
 					OnHit();

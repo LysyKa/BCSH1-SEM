@@ -44,7 +44,7 @@ public partial class Tower2d : StaticBody2D
 		GetNode<Area2D>("TowerArea2D").GetNode<CollisionShape2D>("TowerRangeCollisionShape2D").Shape = new CircleShape2D() { Radius = range };
 		GetNode<Sprite2D>("Sprite").Texture = ResourceLoader.Load<Texture2D>(spritePath);
 		attackTimer = new Godot.Timer();
-		if (attackSpeed > 0)attackTimer.WaitTime = 1/attackSpeed; else attackTimer.WaitTime = 0;
+		if (attackSpeed > 0) attackTimer.WaitTime = 1 / attackSpeed; else attackTimer.WaitTime = 0;
 		attackTimer.Timeout += tryShoot;
 		AddChild(attackTimer);
 		attackTimer.Start();
@@ -83,6 +83,9 @@ public partial class Tower2d : StaticBody2D
 
 			if (currAngleDifference < fireAngleThreshold)
 			{
+				// PlaySound("res://Sounds/dragon-studio-pop-402323.mp3");
+				PlaySound("res://Sounds/dragon-studio-pop-402324.mp3");
+				
 				Projectile2d proj = projectile.Instantiate<Projectile2d>();
 				proj.GlobalPosition = GetNode<Marker2D>("Marker2D").GlobalPosition;
 				proj.CurrentTarget = currentTarget;
@@ -91,31 +94,36 @@ public partial class Tower2d : StaticBody2D
 				proj.Speed = projectileSpeed;
 				GetParent().AddChild(proj);
 				//PlayRecoil();
+				
 			}
 			currTargets.Remove(currentTarget);
 			currTargetCount--;
 		}
 	}
+	public void PlaySound(string path)
+	{
+		var player = new AudioStreamPlayer();
+		AddChild(player);
 
+		player.Stream = GD.Load<AudioStream>(path);
+		player.Play();
+
+		player.Finished += () => player.QueueFree();
+	}
 	public void PlayRecoil()
-{
-    var tween = CreateTween();
-	var start = this.RotationDegrees;
-    tween.TweenProperty(this, "rotation_degrees", start - 5f, 0.1);
-	tween.TweenProperty(this, "rotation_degrees", start, 0.08).SetDelay(0.04);
-    // tween.TweenProperty(this, "rotation_degrees", 0, 0.1).SetDelay(0.05);
-}
+	{
+		var tween = CreateTween();
+		var start = this.RotationDegrees;
+		tween.TweenProperty(this, "rotation_degrees", start - 5f, 0.1);
+		tween.TweenProperty(this, "rotation_degrees", start, 0.08).SetDelay(0.04);
+		// tween.TweenProperty(this, "rotation_degrees", 0, 0.1).SetDelay(0.05);
+	}
 	private double RotateTowards(Vector2 targetPosition, double delta)
 	{
-		// Vector2 direction = targetPosition - GlobalPosition;
-		// float angle = Mathf.Atan2(direction.Y, direction.X);
-		// Rotation = angle;
-
 		Vector2 direction = targetPosition - GlobalPosition;
 		double targetAngle = Mathf.Atan2(direction.Y, direction.X);
 		Rotation = (float)Mathf.RotateToward(Rotation, targetAngle, rotationSpeed * delta);
 		return Mathf.Abs(Mathf.AngleDifference(Rotation, targetAngle));
-
 	}
 
 
